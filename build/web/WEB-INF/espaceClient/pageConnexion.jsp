@@ -16,13 +16,14 @@
         <h1>Connexion</h1>
         
         <section id="panLogger">
-            <p id="clientInconnu">${clientInconnu}</p>
+            <p class="clientInconnu">${clientInconnu}</p>
+            <p class="clientInconnu">${emailVide}</p>
         <div id="loger">
             <form action="FrontController" method="POST">
                 <input type="email" name="email" placeHolder="Entrez votre Email..." />
                 <input type="password" name="password" placeHolder="Mot de passe"/>
                 <input type="checkbox" name="checkbox" value="Mémoriser mes identifiants" />
-                <input type="submit" name="seConnecter" value="se Connecter"/>
+                <input type="submit" name="submit" value="se Connecter"/>
             </form>
         </div>
     

@@ -10,21 +10,21 @@ import java.sql.Statement;
 //TODO il ne faut pas oublier le Pool de connection a creer
 public class ClientDAO implements DAOInterface{
     private Client client;
-    private Connexion connexion;
+    
     private Statement stmt;
     private PreparedStatement pstmt;
     private String query;
     
     
     public ClientDAO() {
-    connexion = new Connexion();
-    connexion.toConnect();
+    
+    Connexion.toConnect();
     }
     
     public ClientDAO(Client client) {
         this.client = client;
-        connexion = new Connexion();
-        connexion.toConnect();
+        
+        Connexion.toConnect();
     }
     
     
@@ -33,7 +33,7 @@ public class ClientDAO implements DAOInterface{
         
         try {
             //query = "SELECT * FROM Client WHERE cliEmail = " + email;
-            stmt = connexion.connection.createStatement(
+            stmt = Connexion.connection.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             
@@ -106,20 +106,15 @@ public class ClientDAO implements DAOInterface{
           boolean check = false;
         
         try {
-            query = "SELECT * FROM Client WHERE cliEmail = " + email;
-            stmt = connexion.connection.createStatement(
+            query = "SELECT * FROM Client WHERE cliEmail = '" + email + "';";
+            stmt = Connexion.connection.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             
             rs = stmt.executeQuery(query);
             while(rs.next()) {
                                 
-               if(rs.getString("cliEmail").isEmpty()) {
-                    check = false;
-                }
-               else {
-                check = true;   
-               }
+                check = !rs.getString("cliEmail").isEmpty();
               
             }
         }catch(SQLException ex) {

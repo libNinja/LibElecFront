@@ -13,14 +13,15 @@ public class VerificateurClient {
         
     }
     
-    public VerificateurClient(String email, String password) {
+    public VerificateurClient(String email) {
         this.email = email;
-        this.password = password;
+        
         
     }
     
     public boolean checkClient() {
         clientDao = new ClientDAO();
+        
         return clientDao.isExists(email);
     }
   

@@ -22,18 +22,21 @@ public final class Connexion {
 
         try {
             
-            connection = DriverManager.getConnection(
-                    "jdbc:sqlserver://localhost:1433;"
-                    + "databaseName=libElec;user=sa;password=sa");
+//            connection = DriverManager.getConnection(
+//                    "jdbc:sqlserver://localhost:1433;"
+//                    + "databaseName=libelec;user=sa;password=sa");
 
+                        connection = DriverManager.getConnection(
+                    "jdbc:sqlserver://localhost:1433;"
+                    + "databaseName=libelec;user=sa;password=saObito95000_");
              
-             
+            System.out.println("okokok");
+                        
         } catch (SQLException ex) {
             System.err.println("Oops:Connection:" + ex.getErrorCode() + ":" + ex.getMessage());
-            return;
         }
 
-    
+        
     }
 
     public static void disconnect() {

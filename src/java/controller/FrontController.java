@@ -37,7 +37,8 @@ public class FrontController extends HttpServlet {
         request.setAttribute("title", title);
         
         String clientInconnu = "Erreur Email inconnu ou inexistant !";
-               
+        String emailVide = "Erreur, veuillez completer le champ de l'émail";
+        String email = "";
         
         Client client = new Client();
         client.setCliId(1);
@@ -66,20 +67,27 @@ public class FrontController extends HttpServlet {
         }
         
         if(request.getParameter("submit") != null) {
-            verificateurClient = new VerificateurClient(request.getParameter("email"), request.getParameter("password"));
-            if(verificateurClient.checkClient()) {
-                page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
-                }
-            }
-            else {
-//                request.setAttribute("clientInconnu", clientInconnu);
+           
+            if(request.getParameter("email").isEmpty()) {
+                request.setAttribute("emailVide", emailVide);
                 page ="/WEB-INF/espaceClient/pageConnexion.jsp";
-                
+            
+            
             }
+//            else {
+//                verificateurClient = new VerificateurClient(request.getParameter("email"));
+//                if(verificateurClient.checkClient()) {
+//                    page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
+//                }
+//                else {
+//                    request.setAttribute("clientInconnu", clientInconnu);
+//                    page ="/WEB-INF/espaceClient/pageConnexion.jsp";
+//                }
+//            }
+//            response.sendRedirect(page);
+//            return;
         }
         
-//            response.sendRedirect(page);
-        //return ;
         
         
         page = response.encodeURL(page);

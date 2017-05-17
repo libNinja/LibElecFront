@@ -26,6 +26,12 @@ ul{
   color:#ffffff;
 }
 
+
+.clientInconnu {
+    color: RED;
+}
+
+
 .dark{
   padding:15px;
   background:#35424a;
@@ -85,9 +91,7 @@ header a:hover{
     
 }
 
-#clientInconnu {
-    color: RED;
-}
+
 
 /* Showcase */
 #showcase{
