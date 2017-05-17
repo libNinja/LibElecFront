@@ -79,11 +79,21 @@ header a:hover{
   font-weight:bold;
 }
 
+
+#logger {
+    white-space: pre;
+    
+}
+
+#clientInconnu {
+    color: RED;
+}
+
 /* Showcase */
 #showcase{
   min-height:400px;
   background:url('../img/libElec2.jpg') no-repeat 0;
- background-position: 80% 45%;
+/* background-position: 80% 45%;*/
  
                        
   text-align:center;

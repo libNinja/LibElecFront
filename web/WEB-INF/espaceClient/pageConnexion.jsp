@@ -15,12 +15,14 @@
         
         <h1>Connexion</h1>
         
+        <section id="panLogger">
+            <p id="clientInconnu">${clientInconnu}</p>
         <div id="loger">
             <form action="FrontController" method="POST">
                 <input type="email" name="email" placeHolder="Entrez votre Email..." />
                 <input type="password" name="password" placeHolder="Mot de passe"/>
                 <input type="checkbox" name="checkbox" value="Mémoriser mes identifiants" />
-                <input type="submit" name="seConnecter" />
+                <input type="submit" name="seConnecter" value="se Connecter"/>
             </form>
         </div>
     
@@ -29,8 +31,8 @@
             <p>
             <c:url var="pageInscription" value="FrontController?section=pageInscription" />
             <a href="${pageInscription}">Inscrivez-vous ici !</a></p>
-
-
+            </div>
+    </section>
 
         
     </body>

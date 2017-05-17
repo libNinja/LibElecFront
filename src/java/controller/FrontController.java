@@ -15,33 +15,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.Client;
 import modelTablesDB.ClientDAO;
-/**
- *
- * @author cdi213
- */
+import model.VerificateurClient;
+
+
+
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
+    private VerificateurClient verificateurClient;
     
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         
+        
+        
         String page = "/WEB-INF/includes/home.jsp";
         String section = request.getParameter("section");
-
+        
         String title = "";
         request.setAttribute("title", title);
         
+        String clientInconnu = "Erreur Email inconnu ou inexistant !";
+               
         
         Client client = new Client();
         client.setCliId(1);
@@ -56,7 +52,7 @@ public class FrontController extends HttpServlet {
             
         }
         
-         if ("menu-main".equalsIgnoreCase(section)) {
+        if ("menu-main".equalsIgnoreCase(section)) {
             page = "/WEB-INF/includes/headerCommun.jsp";
         }
         
@@ -66,57 +62,70 @@ public class FrontController extends HttpServlet {
             }
             else {
                 page ="/WEB-INF/espaceClient/pageConnexion.jsp";
-               
             }
         }
+        
+        if(request.getParameter("submit") != null) {
+            verificateurClient = new VerificateurClient(request.getParameter("email"), request.getParameter("password"));
+            if(verificateurClient.checkClient()) {
+                page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
+                }
+            }
+            else {
+//                request.setAttribute("clientInconnu", clientInconnu);
+                page ="/WEB-INF/espaceClient/pageConnexion.jsp";
+                
+            }
+        }
+        
 //            response.sendRedirect(page);
         //return ;
-            
-            
-            page = response.encodeURL(page);
-            
-            this.getServletContext().getRequestDispatcher(page).include(request, response);
-            
-            
-        }
         
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-                processRequest(request, response);
-            }
         
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-                processRequest(request, response);
-            }
+        page = response.encodeURL(page);
         
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo() {
-                return "Short description";
-            }// </editor-fold>
+        this.getServletContext().getRequestDispatcher(page).include(request, response);
+        
         
     }
+    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+    
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+    
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+    
+}

@@ -15,6 +15,12 @@ public class ClientDAO implements DAOInterface{
     private PreparedStatement pstmt;
     private String query;
     
+    
+    public ClientDAO() {
+    connexion = new Connexion();
+    connexion.toConnect();
+    }
+    
     public ClientDAO(Client client) {
         this.client = client;
         connexion = new Connexion();
@@ -26,7 +32,7 @@ public class ClientDAO implements DAOInterface{
         ResultSet rs;
         
         try {
-            query = "SELECT * FROM Client WHERE cliId = 1;";
+            //query = "SELECT * FROM Client WHERE cliEmail = " + email;
             stmt = connexion.connection.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
@@ -62,10 +68,67 @@ public class ClientDAO implements DAOInterface{
     public void update() {
     }
     
-    @Override
-    public void search() {
-        
+   
+    public void search(Client client) {
+//          ResultSet rs;
+//        
+//        try {
+//            query = "SELECT * FROM Client WHERE cliEmail = " + email;
+//            stmt = connexion.connection.createStatement(
+//                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+//                    ResultSet.CONCUR_READ_ONLY);
+//            
+//            rs = stmt.executeQuery(query);
+//            while(rs.next()) {
+//                client = new Client();
+//                                
+//                client.setCliId(rs.getLong("cliId"));
+//                client.setCliGenre(rs.getInt("cliGenre"));
+//                client.setCliPrenom(rs.getString("cliPrenom"));
+//                client.setCliNom(rs.getString("cliNom"));
+//                client.setCliEmail(rs.getString("cliEmail"));
+//                client.setCliMdp(rs.getString("cliMdp"));
+//                client.setCliDateAdhesion(rs.getString("cliDateAdhesion"));
+//                client.setCliTelF(rs.getString("cliTelF"));
+//                client.setCliTelM(rs.getString("cliTelM"));
+//                client.setCliStatut(rs.getInt("cliStatut"));
+//                client.setCliChampLibre(rs.getString("cliChampLibre"));
+//            }
+//        }catch(SQLException ex) {
+//            System.out.println("erreur chargement client / " + ex.getMessage());
+//        }
+//        
+//        return client;
     }
+    
+    public boolean isExists(String email) {
+          ResultSet rs;
+          boolean check = false;
+        
+        try {
+            query = "SELECT * FROM Client WHERE cliEmail = " + email;
+            stmt = connexion.connection.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            
+            rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                                
+               if(rs.getString("cliEmail").isEmpty()) {
+                    check = false;
+                }
+               else {
+                check = true;   
+               }
+              
+            }
+        }catch(SQLException ex) {
+            System.out.println("erreur chargement client / " + ex.getMessage());
+        }
+        
+        return check;
+    }
+   
     
    
 }
