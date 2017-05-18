@@ -22,13 +22,13 @@ public final class Connexion {
 
         try {
             
-//            connection = DriverManager.getConnection(
-//                    "jdbc:sqlserver://localhost:1433;"
-//                    + "databaseName=libelec;user=sa;password=sa");
-
-                        connection = DriverManager.getConnection(
+            connection = DriverManager.getConnection(
                     "jdbc:sqlserver://localhost:1433;"
-                    + "databaseName=libelec;user=sa;password=saObito95000_");
+                    + "databaseName=libelec;user=sa;password=sa");
+//
+//                        connection = DriverManager.getConnection(
+//                    "jdbc:sqlserver://localhost:1433;"
+//                    + "databaseName=libelec;user=sa;password=saObito95000_");
              
             System.out.println("okokok");
                         

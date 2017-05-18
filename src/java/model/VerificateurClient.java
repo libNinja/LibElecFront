@@ -20,10 +20,28 @@ public class VerificateurClient {
     }
     
     public boolean checkClient() {
+        boolean check = false;
         clientDao = new ClientDAO();
         
-        return clientDao.isExists(email);
+        if(clientDao.isExists(email)) {
+            client = clientDao.loadFromDB(email);
+            check = true;
+        }
+        
+        return check;
     }
-  
+    
+    public boolean checkMdp(String mdp) {
+        boolean check = false;
+        if(client.getCliMdp().equals(mdp)) {
+            check = true;
+        }
+        return check;
+    }
+    
+    public Client getClient() {
+        return this.client;
+    }
+      
     
 }

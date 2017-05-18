@@ -27,7 +27,7 @@ ul{
 }
 
 
-.clientInconnu {
+#clientInconnu {
     color: RED;
 }
 
@@ -85,12 +85,33 @@ header a:hover{
   font-weight:bold;
 }
 
+/* pageConnexion */
 
-#logger {
-    white-space: pre;
+#loger {
+   
+    margin-left: 70px;
     
 }
 
+
+#membre {
+    
+}
+
+#membreInfos {
+    
+}
+
+#membreAdresse {
+    
+}
+
+
+
+
+#nonInscrit {
+    color: BLUE;
+}
 
 
 /* Showcase */

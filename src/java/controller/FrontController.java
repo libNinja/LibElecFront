@@ -17,7 +17,7 @@ import beans.Client;
 import modelTablesDB.ClientDAO;
 import model.VerificateurClient;
 
-
+//TODO il faut activer la session des la rentree du mot de passe
 
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
@@ -36,14 +36,13 @@ public class FrontController extends HttpServlet {
         String title = "";
         request.setAttribute("title", title);
         
-        String clientInconnu = "Erreur Email inconnu ou inexistant !";
-        String emailVide = "Erreur, veuillez completer le champ de l'émail";
-        String email = "";
+        String identifiantInconnu = "Email ou Mot de passe inconnu ou inexistant !";
         
-        Client client = new Client();
-        client.setCliId(1);
-        ClientDAO c = new ClientDAO(client);
-        request.setAttribute("client", c);
+        String emailVide = "Veuillez completer le champ de l'émail";
+        String mdpVide = "Veuillez completer le champ du mot de passe";
+        
+        
+        
         boolean log = false;
         
         
@@ -66,28 +65,41 @@ public class FrontController extends HttpServlet {
             }
         }
         
-        if(request.getParameter("submit") != null) {
-           
+        if("verifierClient".equalsIgnoreCase(section)) {
             if(request.getParameter("email").isEmpty()) {
                 request.setAttribute("emailVide", emailVide);
                 page ="/WEB-INF/espaceClient/pageConnexion.jsp";
-            
-            
             }
-//            else {
-//                verificateurClient = new VerificateurClient(request.getParameter("email"));
-//                if(verificateurClient.checkClient()) {
-//                    page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
-//                }
-//                else {
-//                    request.setAttribute("clientInconnu", clientInconnu);
-//                    page ="/WEB-INF/espaceClient/pageConnexion.jsp";
-//                }
-//            }
-//            response.sendRedirect(page);
-//            return;
+            else {
+                verificateurClient = new VerificateurClient(request.getParameter("email"));
+                if(verificateurClient.checkClient()) {
+                    if(request.getParameter("password").isEmpty()) {
+                        request.setAttribute("mdpVide", mdpVide);
+                        page ="/WEB-INF/espaceClient/pageConnexion.jsp";
+                    }
+                    else {
+                        if(verificateurClient.checkMdp(request.getParameter("password"))) {
+                            System.out.println("true");
+                            request.setAttribute("client", verificateurClient.getClient());
+                            page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
+                        }
+                        else {
+                            request.setAttribute("identifiantInconnu", identifiantInconnu);
+                            page ="/WEB-INF/espaceClient/pageConnexion.jsp";
+                        }
+                    }
+                }
+               
+                request.setAttribute("identifiantInconnu", identifiantInconnu);
+                page ="/WEB-INF/espaceClient/pageConnexion.jsp";
+                
+            }
+            
         }
         
+        if("pageInscription".equalsIgnoreCase(section)) {
+            page ="/WEB-INF/espaceClient/pageInscription.jsp";
+        }
         
         
         page = response.encodeURL(page);

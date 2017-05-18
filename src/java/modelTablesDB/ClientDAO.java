@@ -28,30 +28,36 @@ public class ClientDAO implements DAOInterface{
     }
     
     
-    public Client loadFromDB() {
+    public Client loadFromDB(String email) {
         ResultSet rs;
+        boolean check = false;
+        Client client = null;
         
         try {
-            //query = "SELECT * FROM Client WHERE cliEmail = " + email;
+            query = "SELECT * FROM Client WHERE cliEmail = '" + email + "' ;";
             stmt = Connexion.connection.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             
             rs = stmt.executeQuery(query);
             while(rs.next()) {
-                client = new Client();
-                                
-                client.setCliId(rs.getLong("cliId"));
-                client.setCliGenre(rs.getInt("cliGenre"));
-                client.setCliPrenom(rs.getString("cliPrenom"));
-                client.setCliNom(rs.getString("cliNom"));
-                client.setCliEmail(rs.getString("cliEmail"));
-                client.setCliMdp(rs.getString("cliMdp"));
-                client.setCliDateAdhesion(rs.getString("cliDateAdhesion"));
-                client.setCliTelF(rs.getString("cliTelF"));
-                client.setCliTelM(rs.getString("cliTelM"));
-                client.setCliStatut(rs.getInt("cliStatut"));
-                client.setCliChampLibre(rs.getString("cliChampLibre"));
+                
+                if( !rs.getString("cliEmail").isEmpty()) {
+                
+                    client = new Client();
+                    
+                    client.setCliId(rs.getLong("cliId"));
+                    client.setCliGenre(rs.getInt("cliGenre"));
+                    client.setCliPrenom(rs.getString("cliPrenom"));
+                    client.setCliNom(rs.getString("cliNom"));
+                    client.setCliEmail(rs.getString("cliEmail"));
+                    client.setCliMdp(rs.getString("cliMdp"));
+                    client.setCliDateAdhesion(rs.getString("cliDateAdhesion"));
+                    client.setCliTelF(rs.getString("cliTelF"));
+                    client.setCliTelM(rs.getString("cliTelM"));
+                    client.setCliStatut(rs.getInt("cliStatut"));
+                    client.setCliChampLibre(rs.getString("cliChampLibre"));
+                }
             }
         }catch(SQLException ex) {
             System.out.println("erreur chargement client / " + ex.getMessage());

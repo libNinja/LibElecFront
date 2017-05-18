@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +18,9 @@
          <c:url var="headerCommun" value="FrontController?section=menu-main" />
         <c:import url="${headerCommun}" />
         
-        <h1>Hello World!</h1>
+        <h1>Bienvenue M ${client.cliNom}</h1>
+        
+        
+        
     </body>
 </html>
