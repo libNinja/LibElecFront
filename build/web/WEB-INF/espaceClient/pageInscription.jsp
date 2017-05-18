@@ -9,7 +9,7 @@
         <title>LibElec | Nouveau Membre</title>
     </head>
         
-    <body>
+    <body id="arriere">
         <c:url var="headerCommun" value="FrontController?section=menu-main" />
         <c:import url="${headerCommun}" />
             
@@ -17,7 +17,7 @@
             <p>Veuillez renseigner les informations</p>
             <form action="FrontController?section=enregisterNouveauMembre" method="POST">
                 <div class="membreInfos">
-                    <p>Données personnelles</p>
+                    <p>infos personnelles</p>
                     <label for="genre">Genre</label>
                     <input type="radio" name="genre">Mr</input>
                     <input type="radio" name="genre">Mme</input>
@@ -47,7 +47,7 @@
                 </div>   
                     
                 <div class="membreAdresse">
-                    <p>Champ Adresse</p>
+                    <p>Adresse</p>
                     <label for="numVoie">Numero voie</label><input type="text" name="numVoie" />
                 </div>
                 
@@ -70,8 +70,8 @@
                 <div class="membreAdresse">
                     <label for="pays">Pays</label><input type="text" name="pays" />
                 </div>
-                <div>
-                    <input type="submit" name="submit" />
+                <div id="submitInscription">
+                    <input type="submit" name="submit" value="Enregister"/>
                 </div>
                 
             </form>
