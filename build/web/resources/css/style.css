@@ -95,16 +95,28 @@ header a:hover{
 
 
 #membre {
-    
+   /*white-space: pre;*/
+     margin-left:245px;
+     /*text-align: center;*/
+     
 }
 
-#membreInfos {
-    
+.membreInfos label{
+   
+      display: block;
+    width: 150px;
+    float: left;
+
 }
 
-#membreAdresse {
-    
+.membreAdresse label{
+   
+      display: block;
+    width: 150px;
+    float: left;
+
 }
+
 
 
 
