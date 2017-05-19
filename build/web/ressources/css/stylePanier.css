@@ -1,0 +1,20 @@
+/*Boutons dans detail-panier*/
+#Catalogue
+{
+    color:black;
+    border-style:hidden;
+    border-width:2px;
+    border-color:blue;
+    margin-top: 50px;
+    margin-left: 200px;
+}
+
+#Valider_Commande
+{
+    color:black;
+    border-style:ridge;
+    border-width:2px;
+    border-color:blue;
+    margin-top:50px;
+    margin-left: 100px;
+}
