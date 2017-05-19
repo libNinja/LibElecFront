@@ -94,7 +94,19 @@ header a:hover{
 }
 
 #arriere {
-    background-color: #b2cecf; /*bleu blanc cassé*/
+    background-color:  /*bleu blanc cassé*/#CCC;
+}
+
+fieldset
+{
+  background-color:#b2cecf;
+  max-width:500px;
+  padding:16px;	
+}
+.legend
+{
+  margin-bottom:0px;
+  margin-left:16px;
 }
 
 #submitInscription {
@@ -118,7 +130,7 @@ header a:hover{
     
 }
 
-.membreInfos input[type="text"], [type="email"] {
+.membreInfos input[type="text"], [type="email"], [type="date"] {
     width: 150px;
     margin-bottom: 20px;
     vertical-align: top;

@@ -14,14 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.Client;
+import java.util.ArrayList;
+import java.util.HashMap;
 import modelTablesDB.ClientDAO;
-import model.VerificateurClient;
+import model.VerificateurSaisie;
 
 //TODO il faut activer la session des la rentree du mot de passe
 
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
-    private VerificateurClient verificateurClient;
+    private VerificateurSaisie verificateurSaisie;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,16 +73,16 @@ public class FrontController extends HttpServlet {
                 page ="/WEB-INF/espaceClient/pageConnexion.jsp";
             }
             else {
-                verificateurClient = new VerificateurClient(request.getParameter("email"));
-                if(verificateurClient.checkClient()) {
+                verificateurSaisie = new VerificateurSaisie(request.getParameter("email"));
+                if(verificateurSaisie.checkClient()) {
                     if(request.getParameter("password").isEmpty()) {
                         request.setAttribute("mdpVide", mdpVide);
                         page ="/WEB-INF/espaceClient/pageConnexion.jsp";
                     }
                     else {
-                        if(verificateurClient.checkMdp(request.getParameter("password"))) {
+                        if(verificateurSaisie.checkMdp(request.getParameter("password"))) {
                             System.out.println("true");
-                            request.setAttribute("client", verificateurClient.getClient());
+                            request.setAttribute("client", verificateurSaisie.getClient());
                             page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
                         }
                         else {
@@ -99,6 +101,28 @@ public class FrontController extends HttpServlet {
         
         if("pageInscription".equalsIgnoreCase(section)) {
             page ="/WEB-INF/espaceClient/pageInscription.jsp";
+        }
+        
+        if("enregisterNouveauMembre".equalsIgnoreCase(section)) {
+            Client nouveauMembre = new Client();
+          
+            
+            HashMap<String, String> infosNouveau = new HashMap(15);
+            
+            infosNouveau.put("nom", request.getParameter("nom"));
+            infosNouveau.put("prenom", request.getParameter("prenom"));
+            infosNouveau.put("dateNaissance", request.getParameter("dateNaissance"));
+            infosNouveau.put("email", request.getParameter("email"));
+            infosNouveau.put("password", request.getParameter("password"));
+            infosNouveau.put("telF", request.getParameter("telF"));
+            infosNouveau.put("telM", request.getParameter("telM"));
+            
+            verificateurSaisie = new VerificateurSaisie();
+            verificateurSaisie.checkSaisieNouveauMembre(infosNouveau);
+            
+//adresse
+            
+            
         }
         
         
