@@ -106,6 +106,7 @@ public class FrontController extends HttpServlet {
         
         if("enregisterNouveauMembre".equalsIgnoreCase(section)) {
             ArrayList<String> listeSaisie = new ArrayList(15);
+            HashMap<String, String> listeChaineInscription;
             
             String nom = request.getParameter("nom");
             listeSaisie.add(nom);
@@ -130,22 +131,38 @@ public class FrontController extends HttpServlet {
             
             verificateurSaisie = new VerificateurSaisie();
                         
-            if(verificateurSaisie.verifierChaineVide(listeSaisie)) {
+/*          if(verificateurSaisie.verifierChaineVide(listeSaisie)) {
                 request.setAttribute("chaineInscriptionVide", chaineInscriptionVide);
                 page = "/WEB-INF/espaceClient/pageInscription.jsp";
             }
-//            else if() {
-//            Client nouveauMembre = new Client();
-//            HashMap<String, String> infosNouveau = new HashMap(15);
-//                        
-//            infosNouveau.put("nom", request.getParameter("nom"));
-//            infosNouveau.put("prenom", request.getParameter("prenom"));
-//            infosNouveau.put("dateNaissance", request.getParameter("dateNaissance"));
-//            infosNouveau.put("email", request.getParameter("email"));
-//            infosNouveau.put("password", request.getParameter("password"));
-//            infosNouveau.put("telF", request.getParameter("telF"));
-//            infosNouveau.put("telM", request.getParameter("telM"));
-//        }
+            else 
+            if{*/
+            Client nouveauMembre = new Client();
+            HashMap<String, String> infosNouveau = new HashMap(15);
+                        
+            infosNouveau.put("nom", request.getParameter("nom"));
+            infosNouveau.put("prenom", request.getParameter("prenom"));
+            infosNouveau.put("dateNaissance", request.getParameter("dateNaissance"));
+            infosNouveau.put("email", request.getParameter("email"));
+            infosNouveau.put("password", request.getParameter("password"));
+            infosNouveau.put("telF", request.getParameter("telF"));
+            infosNouveau.put("telM", request.getParameter("telM"));
+            
+            listeChaineInscription = verificateurSaisie.checkSaisieNouveauMembre(infosNouveau);
+            
+            listeChaineInscription.forEach( (k, v) -> {
+                String tmp = (String) v;
+                
+                if(tmp.equals("vide")) {
+                    request.setAttribute((String) k, "vide");
+                }
+                else if(tmp.equals("invalide")) {
+                    request.setAttribute((String) k, "invalide");
+                } 
+                
+                System.out.println("key :" + k + " => " + v );
+            });
+        //}
 //adresse
             
             

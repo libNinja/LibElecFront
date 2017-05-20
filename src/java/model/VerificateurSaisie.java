@@ -58,7 +58,7 @@ public class VerificateurSaisie {
         return vide;
     }
     
-    public String checkSaisieNouveauMembre(HashMap infosMembre) {
+    public HashMap checkSaisieNouveauMembre(HashMap infosMembre) {
         String chaineSaisie = "";
         this.infosMembre = infosMembre;
         
@@ -81,20 +81,8 @@ public class VerificateurSaisie {
             }
         });
         
-        
-            
-        
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+        return listeChaineControlee;
+      
     }
     
     public void verifierTelephone(Object k, Object v) {
