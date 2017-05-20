@@ -17,6 +17,10 @@
             <p>Veuillez renseigner les informations</p>
             
             <form action="FrontController?section=enregisterNouveauMembre" method="POST">
+                <div id="chaineInscriptionVide">
+                    <p>${chaineInscriptionVide}</p>
+                </div>
+                
                 <fieldset id="fieldset">
                     <legend>Nouveau Membre</legend>
                 <div class="membreInfos">

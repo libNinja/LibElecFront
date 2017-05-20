@@ -43,6 +43,7 @@ public class FrontController extends HttpServlet {
         String emailVide = "Veuillez completer le champ de l'émail";
         String mdpVide = "Veuillez completer le champ du mot de passe";
         
+        String chaineInscriptionVide = "Un ou plusieurs champs vide\nVeuillez completer les champs manquants";
         
         
         boolean log = false;
@@ -104,22 +105,47 @@ public class FrontController extends HttpServlet {
         }
         
         if("enregisterNouveauMembre".equalsIgnoreCase(section)) {
-            Client nouveauMembre = new Client();
-          
+            ArrayList<String> listeSaisie = new ArrayList(15);
             
-            HashMap<String, String> infosNouveau = new HashMap(15);
+            String nom = request.getParameter("nom");
+            listeSaisie.add(nom);
             
-            infosNouveau.put("nom", request.getParameter("nom"));
-            infosNouveau.put("prenom", request.getParameter("prenom"));
-            infosNouveau.put("dateNaissance", request.getParameter("dateNaissance"));
-            infosNouveau.put("email", request.getParameter("email"));
-            infosNouveau.put("password", request.getParameter("password"));
-            infosNouveau.put("telF", request.getParameter("telF"));
-            infosNouveau.put("telM", request.getParameter("telM"));
+            String prenom = request.getParameter("prenom");
+            listeSaisie.add(prenom);
+            
+            String dateNaissance = request.getParameter("dateNaissance");
+            listeSaisie.add(dateNaissance);
+            
+            String email = request.getParameter("email");
+            listeSaisie.add(email);
+            
+            String password = request.getParameter("password");
+            listeSaisie.add(password);
+            
+            String telF = request.getParameter("telF");
+            listeSaisie.add(telF);
+            
+            String telM = request.getParameter("telM");
+            listeSaisie.add(telM);
             
             verificateurSaisie = new VerificateurSaisie();
-            verificateurSaisie.checkSaisieNouveauMembre(infosNouveau);
-            
+                        
+            if(verificateurSaisie.verifierChaineVide(listeSaisie)) {
+                request.setAttribute("chaineInscriptionVide", chaineInscriptionVide);
+                page = "/WEB-INF/espaceClient/pageInscription.jsp";
+            }
+//            else if() {
+//            Client nouveauMembre = new Client();
+//            HashMap<String, String> infosNouveau = new HashMap(15);
+//                        
+//            infosNouveau.put("nom", request.getParameter("nom"));
+//            infosNouveau.put("prenom", request.getParameter("prenom"));
+//            infosNouveau.put("dateNaissance", request.getParameter("dateNaissance"));
+//            infosNouveau.put("email", request.getParameter("email"));
+//            infosNouveau.put("password", request.getParameter("password"));
+//            infosNouveau.put("telF", request.getParameter("telF"));
+//            infosNouveau.put("telM", request.getParameter("telM"));
+//        }
 //adresse
             
             

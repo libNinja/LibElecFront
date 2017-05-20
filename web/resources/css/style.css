@@ -109,6 +109,9 @@ fieldset
   margin-left:16px;
 }
 
+#chaineInscriptionVide {
+    color:#e8491d; 
+}
 #submitInscription {
    margin-left: 320px;
     
