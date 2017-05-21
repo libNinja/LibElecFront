@@ -14,6 +14,7 @@ public class VerificateurSaisie {
     private String email;
     private String password;
     private String chaineSaisie;
+    private boolean nouveauComplet;
     
     public VerificateurSaisie() {
         
@@ -62,12 +63,15 @@ public class VerificateurSaisie {
         String chaineSaisie = "";
         this.infosMembre = infosMembre;
         
+        nouveauComplet = true;
         listeChaineControlee = new HashMap();
         
         infosMembre.forEach( (k, v) -> {
             String s = (String) k;
             
             switch (s) {
+                case "genre": verifierGenre(k, v);
+                break;
                 case "dateNaissance": verifierDateNaissance(k, v);
                 break;
                 case "email": verifierEmail(k, v);
@@ -85,17 +89,26 @@ public class VerificateurSaisie {
       
     }
     
+    public void verifierGenre(Object k, Object v) {
+        String chaineGenre = (String) v;
+        if(!chaineGenre.equals("M") || !chaineGenre.equals("M)
+    
+    }
+    
     public void verifierTelephone(Object k, Object v) {
         String chaineTelephone = (String) v;
         
         if(chaineTelephone.isEmpty()) {
             chaineSaisie = "vide";
+            nouveauComplet = false;
+            
         }
         else if(chaineTelephone.matches("^0[1-9]([-. ]?[0-9]{2}){4}$")) {
             chaineSaisie = "ok";
         }
         else {
             chaineSaisie = "invalide";
+            nouveauComplet = false;
         }
         
         listeChaineControlee.put((String) k, chaineSaisie);
@@ -105,12 +118,14 @@ public class VerificateurSaisie {
         String chaineEmail = (String) v;
         if(chaineEmail.isEmpty()) {
             chaineSaisie = "vide";
+            nouveauComplet = false;
         }
         else if(chaineEmail.matches("^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$")) {
             chaineSaisie = "ok";
         }
         else {
             chaineSaisie = "invalide";
+            nouveauComplet = false;
         }
         
         listeChaineControlee.put((String) k, chaineSaisie);
@@ -121,12 +136,14 @@ public class VerificateurSaisie {
         String chaineDateNaissance = (String) v;
         if(chaineDateNaissance.isEmpty()) {
             chaineSaisie = "vide";
+            nouveauComplet = false;
         }
         else if(chaineDateNaissance.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\\\d\\\\d)")) {
             chaineSaisie = "ok";
         }
         else {
             chaineSaisie = "invalide";
+            nouveauComplet = false;
         }
         
         listeChaineControlee.put((String) k, chaineSaisie);
@@ -137,19 +154,23 @@ public class VerificateurSaisie {
         String chaineValue = (String) v;
         if(chaineValue.isEmpty()) {
             chaineSaisie = "vide";
+            nouveauComplet = false;
         }
         else if(chaineValue.matches("[a-zA-Z]+")) {
             chaineSaisie="ok";
         }
         else {
             chaineSaisie = "invalide";
+            nouveauComplet = false;
         }
         
         listeChaineControlee.put((String) k, chaineSaisie);
         
     }
     
-    
+    public boolean getFlagNouveauComplet() {
+     return this.nouveauComplet;
+    }
     
     
     

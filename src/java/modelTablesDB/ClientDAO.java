@@ -17,8 +17,8 @@ public class ClientDAO implements DAOInterface{
     
     
     public ClientDAO() {
-    
-    Connexion.toConnect();
+        
+        Connexion.toConnect();
     }
     
     public ClientDAO(Client client) {
@@ -43,7 +43,7 @@ public class ClientDAO implements DAOInterface{
             while(rs.next()) {
                 
                 if( !rs.getString("cliEmail").isEmpty()) {
-                
+                    
                     client = new Client();
                     
                     client.setCliId(rs.getLong("cliId"));
@@ -68,26 +68,40 @@ public class ClientDAO implements DAOInterface{
     
     @Override
     public void insert() {
+        //TODO il faut verifier si le client existe avant sa creation dans la DB.
+        try {
+            if(client != null) {
+                String query = "INSERT INTO  Client (cliGenre,cliPrenom,cliNom,cliEmail,cliMdp,cliDateAdhesion,cliTelF,cliTelM,cliStatut,cliChampLibre) "
+                        + "VALUES"
+                        + "(?, ?, ?, ?, ?, ?, ?, ?, ? );";
+                       
+                pstmt = Connexion.connection.prepareStatement(query);
+                
+                pstmt.executeUpdate();
+            }
+        }catch(SQLException ex) {
+            System.out.println("sql exception of insertion: " + ex.getMessage());
+        }
     }
     
     @Override
     public void update() {
     }
     
-   
+    
     public void search(Client client) {
 //          ResultSet rs;
-//        
+//
 //        try {
 //            query = "SELECT * FROM Client WHERE cliEmail = " + email;
 //            stmt = connexion.connection.createStatement(
 //                    ResultSet.TYPE_SCROLL_INSENSITIVE,
 //                    ResultSet.CONCUR_READ_ONLY);
-//            
+//
 //            rs = stmt.executeQuery(query);
 //            while(rs.next()) {
 //                client = new Client();
-//                                
+//
 //                client.setCliId(rs.getLong("cliId"));
 //                client.setCliGenre(rs.getInt("cliGenre"));
 //                client.setCliPrenom(rs.getString("cliPrenom"));
@@ -103,13 +117,13 @@ public class ClientDAO implements DAOInterface{
 //        }catch(SQLException ex) {
 //            System.out.println("erreur chargement client / " + ex.getMessage());
 //        }
-//        
+//
 //        return client;
     }
     
     public boolean isExists(String email) {
-          ResultSet rs;
-          boolean check = false;
+        ResultSet rs;
+        boolean check = false;
         
         try {
             query = "SELECT * FROM Client WHERE cliEmail = '" + email + "';";
@@ -119,9 +133,9 @@ public class ClientDAO implements DAOInterface{
             
             rs = stmt.executeQuery(query);
             while(rs.next()) {
-                                
+                
                 check = !rs.getString("cliEmail").isEmpty();
-              
+                
             }
         }catch(SQLException ex) {
             System.out.println("erreur chargement client / " + ex.getMessage());
@@ -129,7 +143,7 @@ public class ClientDAO implements DAOInterface{
         
         return check;
     }
-   
     
-   
+    
+    
 }

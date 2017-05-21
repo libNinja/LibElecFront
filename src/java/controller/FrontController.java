@@ -43,9 +43,9 @@ public class FrontController extends HttpServlet {
         String emailVide = "Veuillez completer le champ de l'émail";
         String mdpVide = "Veuillez completer le champ du mot de passe";
         
-      //  String chaineInscriptionVide = "Un ou plusieurs champs vide Veuillez completer les champs manquants";
         String chaineInscriptionInvalide ="Un ou plusieurs champs invalides Veuillez completer les champs manquants";
         
+        boolean nouveauComplet;
         boolean log = false;
         
         
@@ -137,9 +137,10 @@ public class FrontController extends HttpServlet {
             }
             else 
             if{*/
-            Client nouveauMembre = new Client();
+            Client nouveauMembre;
             HashMap<String, String> infosNouveau = new HashMap(15);
-                        
+                        //TODO il faut recuperer le genre de radio pr le mettre en String
+            infosNouveau.put("genre", request.getParameter("genre"));
             infosNouveau.put("nom", request.getParameter("nom"));
             infosNouveau.put("prenom", request.getParameter("prenom"));
             infosNouveau.put("dateNaissance", request.getParameter("dateNaissance"));
@@ -149,7 +150,27 @@ public class FrontController extends HttpServlet {
             infosNouveau.put("telM", request.getParameter("telM"));
             
             listeChaineInscription = verificateurSaisie.checkSaisieNouveauMembre(infosNouveau);
+            nouveauComplet = verificateurSaisie.getFlagNouveauComplet();
             
+            if(nouveauComplet) {
+                nouveauMembre = new Client();
+                nouveauMembre.setCliGenre(Integer.valueOf(infosNouveau.get("genre")));
+                nouveauMembre.setCliNom(infosNouveau.get("nom"));
+                nouveauMembre.setCliPrenom(infosNouveau.get("Prenom"));
+                //nouveauMembre.setCliDateAdhesion(infosNouveau.get("dateNaissance"));
+                nouveauMembre.setCliEmail(infosNouveau.get("email"));
+                nouveauMembre.setCliMdp(infosNouveau.get("password"));
+                nouveauMembre.setCliTelF(infosNouveau.get("telF"));
+                nouveauMembre.setCliTelM(infosNouveau.get("telM"));
+            
+                ClientDAO clientDao = new ClientDAO(nouveauMembre);
+                clientDao.insert();
+            }
+                
+                
+                
+                
+                
             listeChaineInscription.forEach( (k, v) -> {
                 String tmp = (String) v;
                 
@@ -160,12 +181,11 @@ public class FrontController extends HttpServlet {
                 else if(tmp.equals("invalide")) {
                     request.setAttribute((String) k, " * invalide");
                     request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                } 
+                }
                 
-                
-                System.out.println("key :" + k + " => " + v );
             });
             
+            System.out.println("nom: /" + infosNouveau.get("nom"));
             
             page = "/WEB-INF/espaceClient/pageInscription.jsp";
             
