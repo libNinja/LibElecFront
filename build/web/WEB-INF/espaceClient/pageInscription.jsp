@@ -18,7 +18,8 @@
             
             <form action="FrontController?section=enregisterNouveauMembre" method="POST">
                 <div id="chaineInscriptionVide">
-                    <p>${chaineInscriptionVide}</p>
+                    <p>${chaineInscriptionInvalide}</p>
+                    
                 </div>
                 
                 <fieldset id="fieldset">
@@ -30,30 +31,30 @@
                     <input type="radio" name="genre">Mme</input>
                 </div>
                 <div class="membreInfos">
-                    <label for="nom">Nom</label><input type="text" name="nom" />
+                    <label for="nom">Nom </label><input type="text" name="nom"/><span class="lblInfos">${nom}</span>
                 </div>
                         
                 <div class="membreInfos">
-                    <label for="prenom">Prenom</label><input type="text" name="prenom" />
+                    <label for="prenom">Prenom</label><input type="text" name="prenom" /><span class="lblInfos">${prenom}</span>
                 </div>
                         
                 <div class="membreInfos">
-                    <label for="dateNaissance">Date de Naissance</label><input type="date" name="dateNaissance" />
+                    <label for="dateNaissance">Date de Naissance</label><input type="date" name="dateNaissance" /><span class="lblInfos">${dateNaissance}</span>
                 </div>
                 <div class="membreInfos">
-                    <label for="email">Email</label><input type="email" name="email" />
-                </div>
-                        
-                <div class="membreInfos">
-                    <label for="password">Mot de passe</label><input type="text" name="password" />
+                    <label for="email">Email</label><input type="email" name="email" /><span class="lblInfos">${email}</span>
                 </div>
                         
                 <div class="membreInfos">
-                    <label for="telF">Telephone fixe</label><input type="text" name="telF" />
+                    <label for="password">Mot de passe</label><input type="text" name="password" /><span class="lblInfos">${password}</span>
                 </div>
                         
                 <div class="membreInfos">
-                    <label for="telM">Telephone mobile</label><input type="text" name="telM" />
+                    <label for="telF">Telephone fixe</label><input type="text" name="telF" /><span class="lblInfos">${telF}</span>
+                </div>
+                        
+                <div class="membreInfos">
+                    <label for="telM">Telephone mobile</label><input type="text" name="telM" /><span class="lblInfos">${telM}</span>
                 </div>   
                 
                 <div class="membreInfos">

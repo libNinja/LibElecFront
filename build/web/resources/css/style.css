@@ -109,8 +109,13 @@ fieldset
   margin-left:16px;
 }
 
-#chaineInscriptionVide {
+#chaineInscriptionVide, #chaineInscriptionInvalide{
     color:#e8491d; 
+}
+
+.lblInfos {
+    color:#e8491d;
+    
 }
 #submitInscription {
    margin-left: 320px;

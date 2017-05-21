@@ -43,8 +43,8 @@ public class FrontController extends HttpServlet {
         String emailVide = "Veuillez completer le champ de l'émail";
         String mdpVide = "Veuillez completer le champ du mot de passe";
         
-        String chaineInscriptionVide = "Un ou plusieurs champs vide\nVeuillez completer les champs manquants";
-        
+      //  String chaineInscriptionVide = "Un ou plusieurs champs vide Veuillez completer les champs manquants";
+        String chaineInscriptionInvalide ="Un ou plusieurs champs invalides Veuillez completer les champs manquants";
         
         boolean log = false;
         
@@ -154,14 +154,22 @@ public class FrontController extends HttpServlet {
                 String tmp = (String) v;
                 
                 if(tmp.equals("vide")) {
-                    request.setAttribute((String) k, "vide");
+                    request.setAttribute((String) k, " * vide");
+                    request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
                 }
                 else if(tmp.equals("invalide")) {
-                    request.setAttribute((String) k, "invalide");
+                    request.setAttribute((String) k, " * invalide");
+                    request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
                 } 
+                
                 
                 System.out.println("key :" + k + " => " + v );
             });
+            
+            
+            page = "/WEB-INF/espaceClient/pageInscription.jsp";
+            
+        
         //}
 //adresse
             
