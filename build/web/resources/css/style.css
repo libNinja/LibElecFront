@@ -100,7 +100,7 @@ header a:hover{
 fieldset
 {
   background-color:#b2cecf;
-  max-width:500px;
+  max-width:900px;
   padding:16px;	
 }
 .legend
@@ -132,7 +132,7 @@ fieldset
 .membreInfos label{
     
     display: block;
-    width: 150px;
+    width: 200px;
     float: left;
     
     

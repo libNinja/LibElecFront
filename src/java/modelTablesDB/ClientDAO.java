@@ -71,13 +71,26 @@ public class ClientDAO implements DAOInterface{
         //TODO il faut verifier si le client existe avant sa creation dans la DB.
         try {
             if(client != null) {
-                String query = "INSERT INTO  Client (cliGenre,cliPrenom,cliNom,cliEmail,cliMdp,cliDateAdhesion,cliTelF,cliTelM,cliStatut,cliChampLibre) "
+                String query = "INSERT INTO  Client "
+                        + "(cliGenre,cliPrenom,cliNom,cliEmail,cliMdp,cliDateAdhesion,cliTelF, cliStatut) "
                         + "VALUES"
-                        + "(?, ?, ?, ?, ?, ?, ?, ?, ? );";
+                        + "(?, ?, ?, ?, ?, ?, ?, ?);";
                        
                 pstmt = Connexion.connection.prepareStatement(query);
+                pstmt.setInt(1, client.getCliGenre());
+                pstmt.setString(2, client.getCliPrenom());
+                pstmt.setString(3, client.getCliNom());
+                pstmt.setString(4, client.getCliEmail());
+                pstmt.setString(5, client.getCliMdp());
+                pstmt.setString(6, client.getCliDateAdhesion());
+                pstmt.setString(7, client.getCliTelF());
+                pstmt.setInt(8, client.getCliStatut());
+                
+                System.out.println("prenom " + client.getCliPrenom());
                 
                 pstmt.executeUpdate();
+                
+                System.out.println("insertion client : ok" );
             }
         }catch(SQLException ex) {
             System.out.println("sql exception of insertion: " + ex.getMessage());

@@ -17,7 +17,7 @@ public class VerificateurSaisie {
     private boolean nouveauComplet;
     
     public VerificateurSaisie() {
-        
+        nouveauComplet = true;
     }
     
     public VerificateurSaisie(String email) {
@@ -63,7 +63,7 @@ public class VerificateurSaisie {
         String chaineSaisie = "";
         this.infosMembre = infosMembre;
         
-        nouveauComplet = true;
+       
         listeChaineControlee = new HashMap();
         
         infosMembre.forEach( (k, v) -> {
@@ -72,13 +72,13 @@ public class VerificateurSaisie {
             switch (s) {
                 case "genre": verifierGenre(k, v);
                 break;
-                case "dateNaissance": verifierDateNaissance(k, v);
-                break;
                 case "email": verifierEmail(k, v);
                 break;
                 case "telF": verifierTelephone(k, v);
                 break;
                 case "telM": verifierTelephone(k, v);
+                break;
+                case "password": verifierPassword(k, v); 
                 break;
                 default: verifierChaine(k, v);
                 break;
@@ -89,10 +89,46 @@ public class VerificateurSaisie {
       
     }
     
+    public void verifierPassword(Object k, Object v) {
+        String chainePassword = (String) v;
+//        ^                 # start-of-string
+//(?=.*[0-9])       # a digit must occur at least once
+//(?=.*[a-z])       # a lower case letter must occur at least once
+//(?=.*[A-Z])       # an upper case letter must occur at least once
+//(?=.*[@#$%^&+=])  # a special character must occur at least once
+//(?=\S+$)          # no whitespace allowed in the entire string
+//.{8,}             # anything, at least eight places though
+//$                 # end-of-string
+        if(chainePassword.isEmpty()){
+             chaineSaisie = "vide";
+            nouveauComplet = false;
+        }
+        
+        if(chainePassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
+            chaineSaisie = "ok";
+        }
+        else {
+             chaineSaisie = "password";
+            nouveauComplet = false;
+        }
+        
+        listeChaineControlee.put((String) k, chaineSaisie);
+    }
+    
     public void verifierGenre(Object k, Object v) {
         String chaineGenre = (String) v;
-        if(!chaineGenre.equals("M") || !chaineGenre.equals("M)
-    
+        
+        System.out.println("genre dans verificateur : " );
+        
+        if(chaineGenre == null) {
+            chaineSaisie = "choix obligatoire";
+            nouveauComplet = false;
+        }
+        else if(chaineGenre.equals("Mr") || chaineGenre.equals("Mme") ) {
+            chaineSaisie = "ok";
+        }
+        
+        listeChaineControlee.put((String) k, chaineSaisie);
     }
     
     public void verifierTelephone(Object k, Object v) {
@@ -120,8 +156,8 @@ public class VerificateurSaisie {
             chaineSaisie = "vide";
             nouveauComplet = false;
         }
-        else if(chaineEmail.matches("^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$")) {
-            chaineSaisie = "ok";
+        else if(chaineEmail.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+               chaineSaisie = "ok";
         }
         else {
             chaineSaisie = "invalide";
@@ -132,23 +168,23 @@ public class VerificateurSaisie {
         
     }
     
-    public void verifierDateNaissance(Object k, Object v) {
-        String chaineDateNaissance = (String) v;
-        if(chaineDateNaissance.isEmpty()) {
-            chaineSaisie = "vide";
-            nouveauComplet = false;
-        }
-        else if(chaineDateNaissance.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\\\d\\\\d)")) {
-            chaineSaisie = "ok";
-        }
-        else {
-            chaineSaisie = "invalide";
-            nouveauComplet = false;
-        }
-        
-        listeChaineControlee.put((String) k, chaineSaisie);
-        
-    }
+//    public void verifierDateNaissance(Object k, Object v) {
+//        String chaineDateNaissance = (String) v;
+//        if(chaineDateNaissance.isEmpty()) {
+//            chaineSaisie = "vide";
+//            nouveauComplet = false;
+//        }
+//        else if(chaineDateNaissance.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\\\d\\\\d)")) {
+//            chaineSaisie = "ok";
+//        }
+//        else {
+//            chaineSaisie = "invalide";
+//            nouveauComplet = false;
+//        }
+//        
+//        listeChaineControlee.put((String) k, chaineSaisie);
+//        
+//    }
     
     public void verifierChaine(Object k, Object v) {
         String chaineValue = (String) v;
@@ -168,7 +204,8 @@ public class VerificateurSaisie {
         
     }
     
-    public boolean getFlagNouveauComplet() {
+    public boolean getNouveauComplet() {
+        System.out.println("nouveau dans verificateur : " +nouveauComplet);
      return this.nouveauComplet;
     }
     

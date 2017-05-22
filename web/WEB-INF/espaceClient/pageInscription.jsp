@@ -27,8 +27,8 @@
                 <div class="membreInfos">
                     <p>infos personnelles</p>
                     <label for="genre">Genre</label>
-                    <input type="radio" name="genre">Mr</input>
-                    <input type="radio" name="genre">Mme</input>
+                    <input type="radio" name="genre" value="Mr">Mr</input>
+                    <input type="radio" name="genre" value="Mme">Mme</input><span class="lblInfos">${genre}</span>
                 </div>
                 <div class="membreInfos">
                     <label for="nom">Nom </label><input type="text" name="nom"/><span class="lblInfos">${nom}</span>
@@ -37,16 +37,21 @@
                 <div class="membreInfos">
                     <label for="prenom">Prenom</label><input type="text" name="prenom" /><span class="lblInfos">${prenom}</span>
                 </div>
-                        
+                      <!--  
                 <div class="membreInfos">
                     <label for="dateNaissance">Date de Naissance</label><input type="date" name="dateNaissance" /><span class="lblInfos">${dateNaissance}</span>
                 </div>
+                      -->
                 <div class="membreInfos">
                     <label for="email">Email</label><input type="email" name="email" /><span class="lblInfos">${email}</span>
                 </div>
                         
                 <div class="membreInfos">
                     <label for="password">Mot de passe</label><input type="text" name="password" /><span class="lblInfos">${password}</span>
+                </div>
+                
+                 <div class="membreInfos">
+                    <label for="confirmPassword">Confirmation Mot de passe</label><input type="text" name="ConfirmPassword" /><span class="lblInfos">${confirmPassword}</span>
                 </div>
                         
                 <div class="membreInfos">

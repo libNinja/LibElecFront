@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.Client;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import modelTablesDB.ClientDAO;
 import model.VerificateurSaisie;
@@ -92,7 +95,7 @@ public class FrontController extends HttpServlet {
                         }
                     }
                 }
-               
+                
                 request.setAttribute("identifiantInconnu", identifiantInconnu);
                 page ="/WEB-INF/espaceClient/pageConnexion.jsp";
                 
@@ -108,14 +111,21 @@ public class FrontController extends HttpServlet {
             ArrayList<String> listeSaisie = new ArrayList(15);
             HashMap<String, String> listeChaineInscription;
             
+            LocalDate toDay = LocalDate.now();
+            
+            
+            String genre = request.getParameter("genre");
+            listeSaisie.add(genre);
+            
+            
             String nom = request.getParameter("nom");
             listeSaisie.add(nom);
             
             String prenom = request.getParameter("prenom");
             listeSaisie.add(prenom);
             
-            String dateNaissance = request.getParameter("dateNaissance");
-            listeSaisie.add(dateNaissance);
+             System.out.println("listeSaisie " + request.getParameter("prenom") + " / " +prenom);
+           
             
             String email = request.getParameter("email");
             listeSaisie.add(email);
@@ -129,68 +139,84 @@ public class FrontController extends HttpServlet {
             String telM = request.getParameter("telM");
             listeSaisie.add(telM);
             
+            
+            
             verificateurSaisie = new VerificateurSaisie();
-                        
-/*          if(verificateurSaisie.verifierChaineVide(listeSaisie)) {
-                request.setAttribute("chaineInscriptionVide", chaineInscriptionVide);
-                page = "/WEB-INF/espaceClient/pageInscription.jsp";
-            }
-            else 
-            if{*/
+            
+            
             Client nouveauMembre;
             HashMap<String, String> infosNouveau = new HashMap(15);
-                        //TODO il faut recuperer le genre de radio pr le mettre en String
-            infosNouveau.put("genre", request.getParameter("genre"));
-            infosNouveau.put("nom", request.getParameter("nom"));
-            infosNouveau.put("prenom", request.getParameter("prenom"));
-            infosNouveau.put("dateNaissance", request.getParameter("dateNaissance"));
-            infosNouveau.put("email", request.getParameter("email"));
-            infosNouveau.put("password", request.getParameter("password"));
-            infosNouveau.put("telF", request.getParameter("telF"));
-            infosNouveau.put("telM", request.getParameter("telM"));
+            
+            
+                infosNouveau.put("genre", request.getParameter("genre"));
+                infosNouveau.put("nom", request.getParameter("nom"));
+                infosNouveau.put("prenom", request.getParameter("prenom"));
+                infosNouveau.put("email", request.getParameter("email"));
+                infosNouveau.put("password", request.getParameter("password"));
+                infosNouveau.put("telF", request.getParameter("telF"));
+             
             
             listeChaineInscription = verificateurSaisie.checkSaisieNouveauMembre(infosNouveau);
-            nouveauComplet = verificateurSaisie.getFlagNouveauComplet();
+            
+            nouveauComplet = verificateurSaisie.getNouveauComplet();
+            System.out.println("flag : " + nouveauComplet);
             
             if(nouveauComplet) {
                 nouveauMembre = new Client();
-                nouveauMembre.setCliGenre(Integer.valueOf(infosNouveau.get("genre")));
+                switch (infosNouveau.get("genre")) {
+                    case "Mr":
+                        nouveauMembre.setCliGenre(1);
+                        break;
+                    case "Mme":
+                        nouveauMembre.setCliGenre(2);
+                        break;
+                }
+                
+                
                 nouveauMembre.setCliNom(infosNouveau.get("nom"));
-                nouveauMembre.setCliPrenom(infosNouveau.get("Prenom"));
-                //nouveauMembre.setCliDateAdhesion(infosNouveau.get("dateNaissance"));
+                nouveauMembre.setCliPrenom(infosNouveau.get("prenom"));
+               
+                nouveauMembre.setCliDateAdhesion(toDay.toString());
                 nouveauMembre.setCliEmail(infosNouveau.get("email"));
                 nouveauMembre.setCliMdp(infosNouveau.get("password"));
                 nouveauMembre.setCliTelF(infosNouveau.get("telF"));
                 nouveauMembre.setCliTelM(infosNouveau.get("telM"));
-            
+                
+                nouveauMembre.setCliStatut(1);
+                
                 ClientDAO clientDao = new ClientDAO(nouveauMembre);
                 clientDao.insert();
             }
+           
                 
-                
-                
-                
-                
-            listeChaineInscription.forEach( (k, v) -> {
-                String tmp = (String) v;
-                
-                if(tmp.equals("vide")) {
-                    request.setAttribute((String) k, " * vide");
-                    request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                }
-                else if(tmp.equals("invalide")) {
-                    request.setAttribute((String) k, " * invalide");
-                    request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                }
-                
-            });
+                listeChaineInscription.forEach( (k, v) -> {
+                    String tmp = (String) v;
+                    
+                    if(tmp.equals("choix obligatoire")) {
+                        request.setAttribute((String) k, " * choix obligatoire");
+                        request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                    }
+                    else if(tmp.equals("vide")) {
+                        request.setAttribute((String) k, " * vide");
+                        request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                    }
+                    else if(tmp.equals("invalide")) {
+                        request.setAttribute((String) k, " * invalide");
+                        request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                    }
+                    else if(tmp.equals("password")) {
+                        request.setAttribute((String) k, " * mot de passe invalide");
+                        System.out.println("k : " + k);
+                        request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                    }
+                });
             
-            System.out.println("nom: /" + infosNouveau.get("nom"));
+            
             
             page = "/WEB-INF/espaceClient/pageInscription.jsp";
             
-        
-        //}
+            
+            //}
 //adresse
             
             
