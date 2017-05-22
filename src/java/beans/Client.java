@@ -1,27 +1,40 @@
+
 package beans;
 
-
-
+import java.util.Date;
 
 public class Client {
-    private long cliId;
+    
+    private  long cliId;
     private int cliGenre;
     private String cliPrenom;
     private String cliNom;
     private String cliEmail;
     private String cliMdp;
-    private String cliDateAdhesion;
+    private Date cliDateAdhesion;
     private String cliTelF;
     private String cliTelM;
     private int cliStatut;
     private String cliChampLibre;
-    
+
     public Client() {
-        
     }
 
-    public Client(long cliId, int cliGenre, String cliPrenom, String cliNom, String cliEmail, String cliMdp, String cliDateAdhesion, String cliTelF, String cliTelM, int cliStatut, String cliChampLibre) {
+    public Client(long cliId, int cliGenre, String cliPrenom, String cliNom, String cliEmail, String cliMdp, Date cliDateAdhesion, String cliTelF, String cliTelM, int cliStatut, String cliChampLibre) {
         this.cliId = cliId;
+        this.cliGenre = cliGenre;
+        this.cliPrenom = cliPrenom;
+        this.cliNom = cliNom;
+        this.cliEmail = cliEmail;
+        this.cliMdp = cliMdp;
+        this.cliDateAdhesion = cliDateAdhesion;
+        this.cliTelF = cliTelF;
+        this.cliTelM = cliTelM;
+        this.cliStatut = cliStatut;
+        this.cliChampLibre = cliChampLibre;
+    }
+
+    public Client(int cliGenre, String cliPrenom, String cliNom, String cliEmail, String cliMdp, Date cliDateAdhesion, String cliTelF, String cliTelM, int cliStatut, String cliChampLibre) {
         this.cliGenre = cliGenre;
         this.cliPrenom = cliPrenom;
         this.cliNom = cliNom;
@@ -82,11 +95,11 @@ public class Client {
         this.cliMdp = cliMdp;
     }
 
-    public String getCliDateAdhesion() {
+    public Date getCliDateAdhesion() {
         return cliDateAdhesion;
     }
 
-    public void setCliDateAdhesion(String cliDateAdhesion) {
+    public void setCliDateAdhesion(Date cliDateAdhesion) {
         this.cliDateAdhesion = cliDateAdhesion;
     }
 
@@ -122,15 +135,11 @@ public class Client {
         this.cliChampLibre = cliChampLibre;
     }
 
-    
     @Override
     public String toString() {
-        String infos = "client "
-                + cliId + "\n"
-        + cliNom + " ";
-        
-        return infos;
+        return "Client{" + "cliId=" + cliId + ", cliGenre=" + cliGenre + ", cliPrenom=" + cliPrenom + ", cliNom=" + cliNom + ", cliEmail=" + cliEmail + ", cliMdp=" + cliMdp + ", cliDateAdhesion=" + cliDateAdhesion + ", cliTelF=" + cliTelF + ", cliTelM=" + cliTelM + ", cliStatut=" + cliStatut + ", cliChampLibre=" + cliChampLibre + '}';
     }
-        
+    
+     
+    
 }
-
