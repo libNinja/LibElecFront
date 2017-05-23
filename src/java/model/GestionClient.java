@@ -1,10 +1,10 @@
 
-package gestion;
+package model;
 
-import accesBDD.ClientDAO;
+import accessDB.ClientDAO;
 import beans.Client;
 import com.sun.faces.facelets.tag.jstl.core.CatchHandler;
-import controleur.FrontControleur;
+import controller.FrontControleur;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.sql.Date;

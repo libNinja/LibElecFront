@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>panier</title>
+         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <link rel="stylesheet" href="./resources/css/style.css" />
+        <title>LibElec | panier</title>
     </head>
     <body>
         <c:url var="url01" value="FrontControleur?section=menu-main" />
@@ -22,7 +23,7 @@
                 </thead>
             </table>
         <br />
-        <a href="FrontControleur?section=authentification"> Valider(aller l'anthentification)</a>
+        <a href="FrontControleur?section=afficher-nouveauClient"> <input type="submit" name="submit" value="Valider" /></a>
         
     </body>
 </html>

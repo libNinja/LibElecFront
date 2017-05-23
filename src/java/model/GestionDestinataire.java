@@ -1,14 +1,14 @@
 
-package gestion;
+package model;
 
 import java.io.Serializable;
 import javax.naming.NamingException;
-import accesBDD.DestinataireDAO;
+import accessDB.DestinataireDAO;
 import java.sql.SQLException;
 import beans.Destinataire;
 import java.util.Collection;
 import java.util.HashMap;
-import gestion.GestionDestinataire;
+import model.GestionDestinataire;
 
 
 public class GestionDestinataire implements Serializable{

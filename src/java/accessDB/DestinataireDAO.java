@@ -1,4 +1,4 @@
-package accesBDD;
+package accessDB;
 
 import java.io.Serializable;
 import java.sql.Connection;

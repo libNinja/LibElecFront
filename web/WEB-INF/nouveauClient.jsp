@@ -4,20 +4,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Authentification</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="./resources/css/style.css" />
+        <title>LibElec | Nouveau Client</title>
     </head>
     <body>
         <c:url var="url01" value="FrontControleur?section=menu-main" />
         <c:import url="${url01}" />
-        <h1>Authentification</h1>
-            <p>Creer une compte</p>
+        <h1>Creer un compte</h1>
             <br />
             
             
             <form action="FrontControleur?section=compte-enregistre" method="POST"> 
+                
+                
                 <div class="membreInfos">
-                    <p>Données personnelles</p>
                     <label for="genre">Genre</label>
                     <input type="radio" name="genre">Mr</input>
                     <input type="radio" name="genre">Mme</input>
@@ -46,10 +47,7 @@
                     <label for="telM">Telephone mobile</label><input type="text" name="telM" />
                 </div>   
                 
-                
-                <%--
                 <div class="membreAdresse">
-                    <p>Champ Adresse</p>
                     <label for="numVoie">Numero voie</label><input type="text" name="numVoie" />
                 </div>
                 
@@ -72,21 +70,16 @@
                 <div class="membreAdresse">
                     <label for="pays">Pays</label><input type="text" name="pays" />
                 </div>
-                --%>
-                
-                
-                <input type='hidden' name='section' value='compte-enregistre'>
+              
                 <%--
-                <a href="FrontControleur?section=compte-enregistre"><input type="submit" name="submit" value="continuer" /></a>
+                <input type='hidden' name='section' value='compte-enregistre'>
+                <input type="submit" name="submit" value="continuer" />
                  --%>
                 
-                 <input type="submit" name="submit" value="continuer" />
-                 
-                 
                 </form> 
-                
         <br />
-        <a href="FrontControleur?section=afficher-destinataire"> Valider(aller a adresse de livraison)</a>
+        <a href="FrontControleur?section=afficher-panier"> <input type="submit" name="submit" value="precedent" /></a>
+        <a href="FrontControleur?section=afficher-livraison"> <input type="submit" name="submit" value="creer un compte" /></a>
         
     </body>
 </html>

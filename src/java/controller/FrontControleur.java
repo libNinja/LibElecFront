@@ -1,4 +1,4 @@
- package controleur;
+ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import gestion.GestionDestinataire;
-import gestion.GestionClient;
-import accesBDD.ClientDAO;
+import model.GestionDestinataire;
+import model.GestionClient;
+import accessDB.ClientDAO;
 import beans.Client;
 import java.sql.Date;
 import java.util.logging.Level;
@@ -27,27 +27,43 @@ public class FrontControleur extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
 
-        String page = "/WEB-INF/home.jsp";
+        String page = "/WEB-INF/includes/home.jsp";
         String section = request.getParameter("section");
         
         
+        if("home".equalsIgnoreCase(section)) {
+            page = "/WEB-INF/includes/home.jsp"; 
+        }
+        
         if ("menu-main".equalsIgnoreCase(section)) {
-            page = "/WEB-INF/menu/menu-main.jsp";
+            page = "/WEB-INF/includes/headerCommun.jsp";
         }
         
         if("afficher-panier".equalsIgnoreCase(section)){
            page = "/WEB-INF/panier.jsp";
         }
         
-         if("afficher-destinataire".equalsIgnoreCase(section)){
-           page = "/WEB-INF/destinataire.jsp";
+         if("afficher-nouveauClient".equalsIgnoreCase(section)){
+           page = "/WEB-INF/nouveauClient.jsp";
         }
          
-        if("authentification".equalsIgnoreCase(section)){
-          page = "/WEB-INF/authentification.jsp";
+        if("afficher-livraison".equalsIgnoreCase(section)){
+          page = "/WEB-INF/livraison.jsp";
+        }
+        
+        if("afficher-paiement".equalsIgnoreCase(section)){
+          page = "/WEB-INF/paiement.jsp";
+        }
+        
+        if("afficher-recap".equalsIgnoreCase(section)){
+          page = "/WEB-INF/recapitulatif.jsp";
         }
          
          
+        
+        
+        
+        
         if("destinataire-insertion".equalsIgnoreCase(section)){
              String destinataireNom = request.getParameter("desNom");
              String destinatairePrenom = request.getParameter("desPrenom");
@@ -72,6 +88,8 @@ public class FrontControleur extends HttpServlet {
                 
              }
             
+             
+             
              if("compte-enregistre".equalsIgnoreCase(section)){
              
              int cliStatut = 1;
@@ -94,12 +112,13 @@ public class FrontControleur extends HttpServlet {
              GestionClient gc = new GestionClient();
              
              gc.insertCliInfo (nvCli);
-           
+             
+            
              
              } catch (IllegalArgumentException ex) {
             
-           
              }
+              page = "/WEB-INF/livraison.jsp";
            //page = response.encodeURL(page);
           //  response.sendRedirect(page);
           //  return ;

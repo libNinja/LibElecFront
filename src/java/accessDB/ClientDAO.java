@@ -1,5 +1,5 @@
 
-package accesBDD;
+package accessDB;
 
 import beans.Client;
 import java.io.Serializable;
