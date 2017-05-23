@@ -3,7 +3,7 @@ package model;
 import beans.Client;
 import java.util.ArrayList;
 import java.util.HashMap;
-import modelTablesDB.ClientDAO;
+import accessDB.ClientDAO;
 
 public class VerificateurSaisie {
     private Client client;
@@ -63,7 +63,7 @@ public class VerificateurSaisie {
         String chaineSaisie = "";
         this.infosMembre = infosMembre;
         
-       
+        
         listeChaineControlee = new HashMap();
         
         infosMembre.forEach( (k, v) -> {
@@ -78,7 +78,7 @@ public class VerificateurSaisie {
                 break;
                 case "telM": verifierTelephone(k, v);
                 break;
-                case "password": verifierPassword(k, v); 
+                case "password": verifierPassword(k, v);
                 break;
                 default: verifierChaine(k, v);
                 break;
@@ -86,21 +86,26 @@ public class VerificateurSaisie {
         });
         
         return listeChaineControlee;
-      
+        
     }
     
     public void verifierPassword(Object k, Object v) {
         String chainePassword = (String) v;
-//        ^                 # start-of-string
-//(?=.*[0-9])       # a digit must occur at least once
-//(?=.*[a-z])       # a lower case letter must occur at least once
-//(?=.*[A-Z])       # an upper case letter must occur at least once
-//(?=.*[@#$%^&+=])  # a special character must occur at least once
-//(?=\S+$)          # no whitespace allowed in the entire string
-//.{8,}             # anything, at least eight places though
-//$                 # end-of-string
+        
+        /**
+        
+        ^                 # start-of-string
+        (?=.*[0-9])       # a digit must occur at least once
+        (?=.*[a-z])       # a lower case letter must occur at least once
+        (?=.*[A-Z])       # an upper case letter must occur at least once
+        (?=.*[@#$%^&+=])  # a special character must occur at least once
+        (?=\S+$)          # no whitespace allowed in the entire string
+        .{8,}             # anything, at least eight places though
+        $                 # end-of-string
+        
+        */
         if(chainePassword.isEmpty()){
-             chaineSaisie = "vide";
+            chaineSaisie = "vide";
             nouveauComplet = false;
         }
         
@@ -108,7 +113,7 @@ public class VerificateurSaisie {
             chaineSaisie = "ok";
         }
         else {
-             chaineSaisie = "password";
+            chaineSaisie = "password";
             nouveauComplet = false;
         }
         
@@ -157,7 +162,7 @@ public class VerificateurSaisie {
             nouveauComplet = false;
         }
         else if(chaineEmail.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-               chaineSaisie = "ok";
+            chaineSaisie = "ok";
         }
         else {
             chaineSaisie = "invalide";
@@ -181,9 +186,9 @@ public class VerificateurSaisie {
 //            chaineSaisie = "invalide";
 //            nouveauComplet = false;
 //        }
-//        
+//
 //        listeChaineControlee.put((String) k, chaineSaisie);
-//        
+//
 //    }
     
     public void verifierChaine(Object k, Object v) {
@@ -205,15 +210,19 @@ public class VerificateurSaisie {
     }
     
     public boolean getNouveauComplet() {
-        System.out.println("nouveau dans verificateur : " +nouveauComplet);
-     return this.nouveauComplet;
+        System.out.println("nouveau dans verificateur : " + nouveauComplet);
+        return this.nouveauComplet;
     }
     
     
+    public void setClient(Client client) {
+        this.client = client;
+    }
     
     public Client getClient() {
         return this.client;
     }
+    
     
     
 }

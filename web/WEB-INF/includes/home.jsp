@@ -35,11 +35,7 @@
                     </section>
                     
                     <section id="boxes">
-                        <div class="container">
-                            <div class="box">
-                            </div>
-                            
-                        </div>
+                        
                     </section>
                     
                     <footer>

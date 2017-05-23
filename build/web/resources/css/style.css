@@ -173,6 +173,16 @@ fieldset
     color: BLUE;
 }
 
+/*
+Espace personnel 
+*/
+
+#historiqueCommandes {
+    margin-left: 100px;
+}
+
+
+
 
 /* Showcase */
 #showcase{

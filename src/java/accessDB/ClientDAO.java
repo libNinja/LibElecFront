@@ -1,6 +1,7 @@
-package modelTablesDB;
+package accessDB;
 
-import UtilDB.*;
+import accessDB.DAOInterface;
+import accessDB.Connexion;
 import beans.Client;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
