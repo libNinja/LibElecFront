@@ -10,13 +10,13 @@
     </head>
     
     <body id="arriere">
-        <c:url var="headerCommun" value="FrontController?section=menu-main" />
+        <c:url var="headerCommun" value="FrontControleur?section=menu-main" />
         <c:import url="${headerCommun}" />
         
         <div id="membre" >
             <p>Veuillez renseigner les informations</p>
             
-            <form action="FrontController?section=enregisterNouveauMembre" method="POST">
+            <form action="FrontControleur?section=enregisterNouveauMembre" method="POST">
                 <div id="chaineInscriptionVide">
                     <p>${chaineInscriptionInvalide}</p>
                     
