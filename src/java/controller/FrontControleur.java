@@ -13,8 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import beans.Client;
-import accessDB.ClientDAO;
+
 /**
  *
  * @author cdi213
@@ -42,13 +41,7 @@ public class FrontControleur extends HttpServlet {
         String title = "";
         request.setAttribute("title", title);
         
-        
-        Client client = new Client();
-        client.setCliId(1);
-        ClientDAO c = new ClientDAO(client);
-        request.setAttribute("client", c);
-        boolean log = false;
-        
+    
         
         
         if("home".equalsIgnoreCase(section)) {
@@ -60,15 +53,7 @@ public class FrontControleur extends HttpServlet {
             page = "/WEB-INF/includes/headerCommun.jsp";
         }
         
-        if("espacePersonnel".equalsIgnoreCase(section)) {
-            if(log) {
-                page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
-            }
-            else {
-                page ="/WEB-INF/espaceClient/pageConnexion.jsp";
-               
-            }
-        }
+        
 //            response.sendRedirect(page);
         //return ;
             
