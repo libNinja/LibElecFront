@@ -10,13 +10,13 @@
     </head>
     
     <body>
-        <c:url var="headerCommun" value="FrontController?section=menu-main" />
+        <c:url var="headerCommun" value="FrontControleur?section=menu-main" />
         <c:import url="${headerCommun}" />
         
         <h1>Connexion</h1>
         
         <div id="loger">
-            <form action="FrontController" method="POST">
+            <form action="FrontControleur" method="POST">
                 <input type="email" name="email" placeHolder="Entrez votre Email..." />
                 <input type="password" name="password" placeHolder="Mot de passe"/>
                 <input type="checkbox" name="checkbox" value="Mémoriser mes identifiants" />
@@ -27,7 +27,7 @@
         <div>
             <p>Pas encore inscrit ? </p>
             <p>
-            <c:url var="pageInscription" value="FrontController?section=pageInscription" />
+            <c:url var="pageInscription" value="FrontControleur?section=pageInscription" />
             <a href="${pageInscription}">Inscrivez-vous ici !</a></p>
 
 

@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url var="fc" value="FrontController" />
+<c:url var="fc" value="FrontControleur" />
 
 <!DOCTYPE HTML>
 <html>
@@ -13,7 +13,7 @@
     
     <body>
         
-        <c:url var="headerCommun" value="FrontController?section=menu-main" />
+        <c:url var="headerCommun" value="FrontControleur?section=menu-main" />
         <c:import url="${headerCommun}" />
             
         <section id="showcase">
