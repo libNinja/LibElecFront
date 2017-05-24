@@ -25,7 +25,7 @@ import model.VerificateurSaisie;
 //TODO il faut activer la session des la rentree du mot de passe
 
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
-public class FrontController extends HttpServlet {
+public class FrontControleur extends HttpServlet {
     private VerificateurSaisie verificateurSaisie;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
