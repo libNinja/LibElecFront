@@ -1,9 +1,11 @@
 package beans;
 
+import java.io.Serializable;
 
 
 
-public class Client {
+
+public class Client implements Serializable {
     private long cliId;
     private int cliGenre;
     private String cliPrenom;

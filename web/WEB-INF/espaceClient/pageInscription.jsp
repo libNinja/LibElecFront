@@ -64,27 +64,27 @@
                 
                 <div class="membreInfos">
                    
-                    <label for="numVoie">Numero voie</label><input type="text" name="numVoie" />
+                    <label for="numVoie">Numero voie</label><input type="text" name="numVoie" /><span class="lblInfos">${numVoie}</span>
                 </div>
                     
                 <div class="membreInfos">
-                    <label for="nomVoie">Nom voie</label><input type="text" name="nomVoie" />
+                    <label for="nomVoie">Nom voie</label><input type="text" name="nomVoie" /><span class="lblInfos">${nomVoie}</span>
                 </div>
                     
                 <div class="membreInfos">
-                    <label for="nomVoieSuite">Nom voie suite</label><input type="text" name="nomVoieSuite" />
+                    <label for="nomVoieSuite">Nom voie suite</label><input type="text" name="nomVoieSuite" /><span class="lblInfos">${nomVoieSuite}</span>
                 </div>    
                     
                 <div class="membreInfos">
-                    <label for="codePostal">Code postal</label><input type="text" name="codePostal" />
+                    <label for="codePostal">Code postal</label><input type="text" name="codePostal" /><span class="lblInfos">${codePostal}</span>
                 </div>    
                     
                 <div class="membreInfos">
-                    <label for="ville">Ville</label><input type="text" name="ville" />
+                    <label for="ville">Ville</label><input type="text" name="ville" /><span class="lblInfos">${ville}</span>
                 </div>    
                     
                 <div class="membreInfos">
-                    <label for="pays">Pays</label><input type="text" name="pays" />
+                    <label for="pays">Pays</label><input type="text" name="pays" /><span class="lblInfos">${pays}</span>
                 </div>
                 <div id="submitInscription">
                     <input type="submit" name="submit" value="Enregister"/>

@@ -4,6 +4,7 @@ import beans.Client;
 import java.util.ArrayList;
 import java.util.HashMap;
 import accessDB.ClientDAO;
+import javax.naming.NamingException;
 
 public class VerificateurSaisie {
     private Client client;
@@ -28,8 +29,12 @@ public class VerificateurSaisie {
     
     public boolean checkClient() {
         boolean check = false;
-        clientDao = new ClientDAO();
-        
+        try {
+            clientDao = new ClientDAO();
+            
+        }catch(NamingException ex) {
+            System.err.println("naming exception : " + ex.getMessage());
+        }
         if(clientDao.isExists(email)) {
             client = clientDao.loadFromDB(email);
             check = true;
@@ -46,24 +51,11 @@ public class VerificateurSaisie {
         return check;
     }
     
-    public boolean verifierChaineVide(ArrayList<String> listeSaisie) {
-        boolean vide = false;
-        this.listeSaisie = listeSaisie;
-        
-        for(String s : listeSaisie) {
-            if(s.isEmpty()) {
-                vide = true;
-            }
-        }
-        
-        return vide;
-    }
-    
+       
     public HashMap checkSaisieNouveauMembre(HashMap infosMembre) {
         String chaineSaisie = "";
         this.infosMembre = infosMembre;
-        
-        
+                
         listeChaineControlee = new HashMap();
         
         infosMembre.forEach( (k, v) -> {
@@ -80,6 +72,7 @@ public class VerificateurSaisie {
                 break;
                 case "password": verifierPassword(k, v);
                 break;
+                case "numVoie" :verifierNumVoie(k , v);
                 default: verifierChaine(k, v);
                 break;
             }
@@ -87,6 +80,23 @@ public class VerificateurSaisie {
         
         return listeChaineControlee;
         
+    }
+    
+    //TODO est-ce que le pays insere par client existe, rajout de la verif? a voir
+    
+    public void verifierNumVoie(Object k, Object v) {
+     String chaineNumVoie = (String) v;
+     if(chaineNumVoie.isEmpty()) {
+         chaineSaisie = "vide";
+         nouveauComplet = false;
+     }
+     else if(chaineNumVoie.matches("[0-9]{3, }+")) {
+         chaineSaisie = "ok";
+     }
+     else {
+         chaineSaisie = "numVoieInvalide";
+     }
+     listeChaineControlee.put( (String) k, chaineSaisie);
     }
     
     public void verifierPassword(Object k, Object v) {
@@ -210,7 +220,6 @@ public class VerificateurSaisie {
     }
     
     public boolean getNouveauComplet() {
-        System.out.println("nouveau dans verificateur : " + nouveauComplet);
         return this.nouveauComplet;
     }
     

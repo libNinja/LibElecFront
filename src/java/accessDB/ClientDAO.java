@@ -1,31 +1,44 @@
 package accessDB;
 
 import accessDB.DAOInterface;
-import accessDB.Connexion;
+import accessDB.ConnexionPool;
 import beans.Client;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.naming.NamingException;
 
 //TODO il ne faut pas oublier le Pool de connection a creer
-public class ClientDAO implements DAOInterface{
+public class ClientDAO implements DAOInterface {
     private Client client;
-    
     private Statement stmt;
     private PreparedStatement pstmt;
     private String query;
+    private ConnexionPool connexionPool;
+    private Connection connection;
     
     
-    public ClientDAO() {
+    public ClientDAO() throws NamingException {
+        connexionPool = new ConnexionPool();
         
-        Connexion.toConnect();
+        try {
+            connection = connexionPool.getConnection();
+        }catch(SQLException ex) {
+            System.err.println("connection to pool : /" + ex.getMessage());   
+        }
     }
     
-    public ClientDAO(Client client) {
+    public ClientDAO(Client client) throws NamingException {
         this.client = client;
+        connexionPool = new ConnexionPool();
         
-        Connexion.toConnect();
+        try {
+            connection = connexionPool.getConnection();
+        }catch(SQLException ex) {
+            System.err.println("connection to pool : /" + ex.getMessage());   
+        }
     }
     
     
@@ -36,7 +49,7 @@ public class ClientDAO implements DAOInterface{
         
         try {
             query = "SELECT * FROM Client WHERE cliEmail = '" + email + "' ;";
-            stmt = Connexion.connection.createStatement(
+            stmt = connection.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             
@@ -77,7 +90,7 @@ public class ClientDAO implements DAOInterface{
                         + "VALUES"
                         + "(?, ?, ?, ?, ?, ?, ?, ?);";
                        
-                pstmt = Connexion.connection.prepareStatement(query);
+                pstmt = connection.prepareStatement(query);
                 pstmt.setInt(1, client.getCliGenre());
                 pstmt.setString(2, client.getCliPrenom());
                 pstmt.setString(3, client.getCliNom());
@@ -141,7 +154,7 @@ public class ClientDAO implements DAOInterface{
         
         try {
             query = "SELECT * FROM Client WHERE cliEmail = '" + email + "';";
-            stmt = Connexion.connection.createStatement(
+            stmt = connection.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             

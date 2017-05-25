@@ -20,13 +20,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import accessDB.ClientDAO;
-import model.VerificateurSaisie;
+import beans.Adresse;
+import model.*;
 
 //TODO il faut activer la session des la rentree du mot de passe
 
 @WebServlet(name = "FrontControleur", urlPatterns = {"/FrontControleur"})
 public class FrontControleur extends HttpServlet {
     private VerificateurSaisie verificateurSaisie;
+    private GestionClient gestionClient;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -108,7 +110,7 @@ public class FrontControleur extends HttpServlet {
         }
         
         
-        //TODO il faut modifier les infos clients, 
+        //TODO il faut modifier les infos clients,
         //TODO il faut supprimer un compte client (changer attribut statut dans la base sans supprimer)
         
         if("enregisterNouveauMembre".equalsIgnoreCase(section)) {
@@ -116,57 +118,32 @@ public class FrontControleur extends HttpServlet {
             HashMap<String, String> listeChaineInscription;
             
             LocalDate toDay = LocalDate.now();
-            
-            /**
-             * recuperation toute saisie utilisateur
-             * rajout l'ensemble de ces saisies à une arraylist 
-             * pour permettre de les checker
-             */
-            
-            String genre = request.getParameter("genre");
-            listeSaisie.add(genre);
-            
-            
-            String nom = request.getParameter("nom");
-            listeSaisie.add(nom);
-            
-            String prenom = request.getParameter("prenom");
-            listeSaisie.add(prenom);
-            
-            System.out.println("listeSaisie " + request.getParameter("prenom") + " / " +prenom);
-            
-            
-            String email = request.getParameter("email");
-            listeSaisie.add(email);
-            
-            String password = request.getParameter("password");
-            listeSaisie.add(password);
-            
-            String telF = request.getParameter("telF");
-            listeSaisie.add(telF);
-            
-            String telM = request.getParameter("telM");
-            listeSaisie.add(telM);
-            
-            
-            
+              
+            //perapration des objets metiers
             verificateurSaisie = new VerificateurSaisie();
             Client nouveauMembre;
+            Adresse adresseNouveauMembre;
             
             
             /**
-            * choix d'une hashmap pour pouvoir reperer 
-            * et récupérer facilement une valeur correspondant à une clé
-            */
+             * choix d'une hashmap pour pouvoir reperer
+             * et récupérer facilement une valeur correspondant à une clé
+             */
             HashMap<String, String> infosNouveau = new HashMap(15);
-                        
+            
             infosNouveau.put("genre", request.getParameter("genre"));
             infosNouveau.put("nom", request.getParameter("nom"));
             infosNouveau.put("prenom", request.getParameter("prenom"));
             infosNouveau.put("email", request.getParameter("email"));
             infosNouveau.put("password", request.getParameter("password"));
             infosNouveau.put("telF", request.getParameter("telF"));
-            
+            infosNouveau.put("telM", request.getParameter("telM"));
+            infosNouveau.put("numVoie", request.getParameter("numVoie"));
+            infosNouveau.put("nomVoie", request.getParameter("nomVoie"));
+            infosNouveau.put("nomVoieSuite", request.getParameter("nomVoieSuite"));
+            infosNouveau.put("codePostal", request.getParameter("codePostal"));
+            infosNouveau.put("ville", request.getParameter("ville"));
+            infosNouveau.put("pays", request.getParameter("pays"));
             /**
              * On envoie la hashmap en parametre au l'objet verificateurSaisie
              * cela retourne une autre hashmap correspondant à l'index saisie (ex: nom)
@@ -174,13 +151,21 @@ public class FrontControleur extends HttpServlet {
              * Si l'inscription est invalide : la hashmap va permettre d'affecter les valeurs
              * et reperer les saisie concernees dans la jsp 'pageInscription'
              */
+            
             listeChaineInscription = verificateurSaisie.checkSaisieNouveauMembre(infosNouveau);
             
+            
+            
+            
             /* drapeau permettant de savoir si l'inscription est complete ou correcte */
+            
             nouveauComplet = verificateurSaisie.getNouveauComplet();
             
             if(nouveauComplet) {
                 nouveauMembre = new Client();
+                adresseNouveauMembre = new Adresse();
+                
+                //client
                 switch (infosNouveau.get("genre")) {
                     case "Mr":
                         nouveauMembre.setCliGenre(1);
@@ -200,51 +185,62 @@ public class FrontControleur extends HttpServlet {
                 
                 nouveauMembre.setCliStatut(1);
                 
+                // il faut maintenant recuperer l'id de ce client depuis la base pour le lier a cette adresse
+                //adresse
+        
+                
+
                 
                 
-                ClientDAO clientDao = new ClientDAO(nouveauMembre);
-                clientDao.insert();
+                // Rajout à la base, le nouveau client
+                GestionClient gestionClient = new GestionClient(nouveauMembre, adresseNouveauMembre);
+                gestionClient.ajouterNouveauClient();
                 
-                // TODO il faut controler si le nouveau membre existe deja dans la base 
+                
+                // TODO il faut controler si le nouveau membre existe deja dans la base
                 request.setAttribute("client", nouveauMembre);
             }
             
-            listeChaineInscription.forEach( (k, v) -> {
-                String tmp = (String) v;
-                
-                if(tmp.equals("choix obligatoire")) {
-                    request.setAttribute((String) k, " * choix obligatoire");
-                    request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                }
-                else if(tmp.equals("vide")) {
-                    request.setAttribute((String) k, " * vide");
-                    request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                }
-                else if(tmp.equals("invalide")) {
-                    request.setAttribute((String) k, " * invalide");
-                    request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                }
-                else if(tmp.equals("password")) {
-                    request.setAttribute((String) k, " * mot de passe invalide");
-                    System.out.println("k : " + k);
-                    request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                }
-            });
-                
+            
             if(nouveauComplet) {
                 
-               
+                
                 page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
                 
             }
             else {
-            page = "/WEB-INF/espaceClient/pageInscription.jsp";
+                listeChaineInscription.forEach( (k, v) -> {
+                    String tmp = (String) v;
+                    
+                    switch (tmp) {
+                        case "choix obligatoire":
+                            request.setAttribute((String) k, " * choix obligatoire");
+                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                            break;
+                        case "vide":
+                            request.setAttribute((String) k, " * vide");
+                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                            break;
+                        case "invalide":
+                            request.setAttribute((String) k, " * invalide");
+                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                            break;
+                        case "password":
+                            request.setAttribute((String) k, " * mot de passe invalide");
+                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                            break;
+                        case "numVoieInvalide":
+                            request.setAttribute( (String) k, " * numero de voie invalide");
+                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                
+                page = "/WEB-INF/espaceClient/pageInscription.jsp";
             }
-            
-            //}
-//adresse
-            
-            
+        
         }
         
         
