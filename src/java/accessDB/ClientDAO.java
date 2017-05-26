@@ -81,8 +81,9 @@ public class ClientDAO implements DAOInterface {
     }
     
     @Override
-    public void insert() {
+    public void insert(Object nouveauMembre) {
         //TODO il faut verifier si le client existe avant sa creation dans la DB.
+        client = (Client) nouveauMembre; 
         try {
             if(client != null) {
                 String query = "INSERT INTO  Client "
@@ -112,7 +113,7 @@ public class ClientDAO implements DAOInterface {
     }
     
     @Override
-    public void update() {
+    public void update(Object client) {
     }
     
     
@@ -171,6 +172,13 @@ public class ClientDAO implements DAOInterface {
         return check;
     }
     
+    public void setClient(Client client) {
+     this.client = client;   
+    }
     
+    public Client getClient(Client client) {
+        return this.client;
+    }
+        
     
 }

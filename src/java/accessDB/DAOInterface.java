@@ -2,8 +2,8 @@ package accessDB;
 
 
 public interface DAOInterface {
-    public void insert();
-    public void update();
+    public void insert(Object o);
+    public void update(Object o);
     
     
 }

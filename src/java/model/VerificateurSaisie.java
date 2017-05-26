@@ -73,6 +73,9 @@ public class VerificateurSaisie {
                 case "password": verifierPassword(k, v);
                 break;
                 case "numVoie" :verifierNumVoie(k , v);
+                break;
+                case "codePostal": verifierCodePostal(k, v);
+                break;
                 default: verifierChaine(k, v);
                 break;
             }
@@ -84,20 +87,38 @@ public class VerificateurSaisie {
     
     //TODO est-ce que le pays insere par client existe, rajout de la verif? a voir
     
+    public void verifierCodePostal(Object k, Object v) {
+     String chaineCodePostal = (String) v;
+     if(chaineCodePostal.isEmpty()) {
+         chaineSaisie = "vide";
+         nouveauComplet = false;
+     }
+     else if(chaineCodePostal.matches("^[0-9]{2,}$")) {
+         chaineSaisie = "ok";
+     }
+     else {
+         chaineSaisie = "Invalide, code postal incorrect";
+     }
+     listeChaineControlee.put( (String) k, chaineSaisie);
+    }
+    
+    
     public void verifierNumVoie(Object k, Object v) {
      String chaineNumVoie = (String) v;
      if(chaineNumVoie.isEmpty()) {
          chaineSaisie = "vide";
          nouveauComplet = false;
      }
-     else if(chaineNumVoie.matches("[0-9]{3, }+")) {
+     else if(chaineNumVoie.matches("^[0-9]{2,}$")) {
          chaineSaisie = "ok";
      }
      else {
-         chaineSaisie = "numVoieInvalide";
+         chaineSaisie = "Invalide, num voie incorrect";
      }
      listeChaineControlee.put( (String) k, chaineSaisie);
     }
+    
+    
     
     public void verifierPassword(Object k, Object v) {
         String chainePassword = (String) v;

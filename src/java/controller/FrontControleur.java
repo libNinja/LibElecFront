@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 import accessDB.ClientDAO;
 import beans.Adresse;
+import javax.naming.NamingException;
 import model.*;
 
 //TODO il faut activer la session des la rentree du mot de passe
@@ -118,7 +119,7 @@ public class FrontControleur extends HttpServlet {
             HashMap<String, String> listeChaineInscription;
             
             LocalDate toDay = LocalDate.now();
-              
+            
             //perapration des objets metiers
             verificateurSaisie = new VerificateurSaisie();
             Client nouveauMembre;
@@ -185,20 +186,41 @@ public class FrontControleur extends HttpServlet {
                 
                 nouveauMembre.setCliStatut(1);
                 
-                // il faut maintenant recuperer l'id de ce client depuis la base pour le lier a cette adresse
-                //adresse
-        
                 
-
-                
-                
-                // Rajout à la base, le nouveau client
-                GestionClient gestionClient = new GestionClient(nouveauMembre, adresseNouveauMembre);
-                gestionClient.ajouterNouveauClient();
+                // Rajout à la base du nouveau client
                 
                 
                 // TODO il faut controler si le nouveau membre existe deja dans la base
                 request.setAttribute("client", nouveauMembre);
+                
+                
+                // il faut maintenant recuperer l'id de ce client depuis la base pour le lier a cette adresse
+                //adresse
+                try {
+                    
+                    GestionClient gestionClient = new GestionClient();
+                    gestionClient.ajouterNouveauClient(nouveauMembre);
+                    
+                    long nouveauMembreId = gestionClient.getIdDB(nouveauMembre);
+                    
+                    adresseNouveauMembre.setCliId(nouveauMembreId);
+                    adresseNouveauMembre.setAdrNumVoie(Integer.valueOf(infosNouveau.get("numVoie")));
+                    adresseNouveauMembre.setAdrNomVoie(infosNouveau.get("nomVoie"));
+                    adresseNouveauMembre.setAdrNomVoieSuite(infosNouveau.get("nomVoieSuite"));
+                    adresseNouveauMembre.setAdrCp(infosNouveau.get("codePostal"));
+                    adresseNouveauMembre.setAdrVille(infosNouveau.get("ville"));
+                    adresseNouveauMembre.setAdrPays(infosNouveau.get("pays"));
+                    
+                    adresseNouveauMembre.setAdrStatut(1);
+                    
+                    
+                    gestionClient.ajouterAdresseNouveauClient(adresseNouveauMembre);
+                    
+                    
+                }catch(NamingException ex) {
+                    System.err.println("naming exception : " + ex.getMessage());
+                }
+                
             }
             
             
@@ -240,7 +262,7 @@ public class FrontControleur extends HttpServlet {
                 
                 page = "/WEB-INF/espaceClient/pageInscription.jsp";
             }
-        
+            
         }
         
         
