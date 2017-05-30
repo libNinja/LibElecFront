@@ -21,7 +21,7 @@
                     <p>${identifiantInconnu}</p>
                     <p>${emailVide}</p>
                     <p>${mdpVide}</p>
-                   
+                   </div>
                     
                     
                     <form action="FrontControleur?section=verifierClient" method="POST">
@@ -30,17 +30,16 @@
                         <input type="checkbox" name="checkbox" value="Mémoriser mes identifiants" />
                         <input type="submit" name="submit" value="se Connecter"/>
                     </form>
-                </div>
                 
-                <div id="nonInscrit">
+                
+              
                     <p>Pas encore inscrit ? </p>
                     <p>
                         <c:url var="pageInscription" value="FrontControleur?section=pageInscription" />
                         <a href="${pageInscription}">Inscrivez-vous ici !</a></p>
-                </div>
+                
+            </section>
         </div>
-    </section>
-    
     
 </body>
 </html>

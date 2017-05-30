@@ -27,8 +27,12 @@ ul{
 }
 
 
-#clientInconnu {
-    color: RED;
+#panLogger {
+    margin-left: 100px;
+    width: 250px;
+    display: block;
+   
+  
 }
 
 
@@ -87,11 +91,7 @@ header a:hover{
 
 /* pageConnexion */
 
-#loger {
-    
-    margin-left: 70px;
-    
-}
+
 
 #arriere {
     background-color:  /*bleu blanc cassé*/#CCC;
@@ -113,7 +113,7 @@ fieldset
     color:#e8491d; 
 }
 
-.lblInfos {
+.lblErreur {
     color:#e8491d;
     
 }
@@ -150,6 +150,11 @@ fieldset
     margin-bottom: 20px;
     vertical-align: top;
     align-content: center;
+}
+
+.membreAdresse {
+    float: right;
+    
 }
 
 .membreAdresse label{

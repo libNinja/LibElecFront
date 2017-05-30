@@ -153,67 +153,35 @@ public class FrontControleur extends HttpServlet {
              * et reperer les saisie concernees dans la jsp 'pageInscription'
              */
             
-            listeChaineInscription = verificateurSaisie.checkSaisieNouveauMembre(infosNouveau);
+            
+            
+            verificateurSaisie.checkSaisieNouveauMembre(infosNouveau);
             
             
             
             
-            /* drapeau permettant de savoir si l'inscription est complete ou correcte */
+            /* drapeau permettant de savoir si la saisie de l'inscription est complete ou incorrecte */
             
             nouveauComplet = verificateurSaisie.getNouveauComplet();
             
+            // TODO il faut controler si le nouveau membre existe deja dans la base
+            
             if(nouveauComplet) {
-                nouveauMembre = new Client();
-                adresseNouveauMembre = new Adresse();
-                
-                //client
-                switch (infosNouveau.get("genre")) {
-                    case "Mr":
-                        nouveauMembre.setCliGenre(1);
-                        break;
-                    case "Mme":
-                        nouveauMembre.setCliGenre(2);
-                        break;
-                }
-                
-                nouveauMembre.setCliNom(infosNouveau.get("nom"));
-                nouveauMembre.setCliPrenom(infosNouveau.get("prenom"));
-                nouveauMembre.setCliDateAdhesion(toDay.toString());
-                nouveauMembre.setCliEmail(infosNouveau.get("email"));
-                nouveauMembre.setCliMdp(infosNouveau.get("password"));
-                nouveauMembre.setCliTelF(infosNouveau.get("telF"));
-                nouveauMembre.setCliTelM(infosNouveau.get("telM"));
-                
-                nouveauMembre.setCliStatut(1);
-                
-                
-                // Rajout à la base du nouveau client
-                
-                
-                // TODO il faut controler si le nouveau membre existe deja dans la base
-                request.setAttribute("client", nouveauMembre);
-                
-                
-                // il faut maintenant recuperer l'id de ce client depuis la base pour le lier a cette adresse
-                //adresse
                 try {
+                    gestionClient = new GestionClient();
+                    nouveauMembre = gestionClient.creerNouveauMembre(infosNouveau);
+                  
                     
-                    GestionClient gestionClient = new GestionClient();
+                    request.setAttribute("client", nouveauMembre);
+                    
+                    
+                    // il faut maintenant recuperer l'id de ce client depuis la base pour le lier a cette adresse
+                    // Rajout à la base du nouveau client
+                    
                     gestionClient.ajouterNouveauClient(nouveauMembre);
                     
-                    long nouveauMembreId = gestionClient.getIdDB(nouveauMembre);
-                    
-                    adresseNouveauMembre.setCliId(nouveauMembreId);
-                    adresseNouveauMembre.setAdrNumVoie(Integer.valueOf(infosNouveau.get("numVoie")));
-                    adresseNouveauMembre.setAdrNomVoie(infosNouveau.get("nomVoie"));
-                    adresseNouveauMembre.setAdrNomVoieSuite(infosNouveau.get("nomVoieSuite"));
-                    adresseNouveauMembre.setAdrCp(infosNouveau.get("codePostal"));
-                    adresseNouveauMembre.setAdrVille(infosNouveau.get("ville"));
-                    adresseNouveauMembre.setAdrPays(infosNouveau.get("pays"));
-                    
-                    adresseNouveauMembre.setAdrStatut(1);
-                    
-                    
+                    long nouveauMembreId = gestionClient.getIdDB(nouveauMembre); // recuperation id client depuis la base 
+                    adresseNouveauMembre = gestionClient.affecterAdresseAuNouveauMembre(nouveauMembreId, infosNouveau);
                     gestionClient.ajouterAdresseNouveauClient(adresseNouveauMembre);
                     
                     
@@ -225,41 +193,11 @@ public class FrontControleur extends HttpServlet {
             
             
             if(nouveauComplet) {
-                
-                
                 page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
-                
             }
             else {
-                listeChaineInscription.forEach( (k, v) -> {
-                    String tmp = (String) v;
-                    
-                    switch (tmp) {
-                        case "choix obligatoire":
-                            request.setAttribute((String) k, " * choix obligatoire");
-                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                            break;
-                        case "vide":
-                            request.setAttribute((String) k, " * vide");
-                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                            break;
-                        case "invalide":
-                            request.setAttribute((String) k, " * invalide");
-                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                            break;
-                        case "password":
-                            request.setAttribute((String) k, " * mot de passe invalide");
-                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                            break;
-                        case "numVoieInvalide":
-                            request.setAttribute( (String) k, " * numero de voie invalide");
-                            request.setAttribute("chaineInscriptionInvalide", chaineInscriptionInvalide);
-                            break;
-                        default:
-                            break;
-                    }
-                });
-                
+                // si le nouveau membre n'a pu etre creer, on affecte l'object au request pour afficher les msgs erreurs
+                request.setAttribute("verificateurSaisie", verificateurSaisie);
                 page = "/WEB-INF/espaceClient/pageInscription.jsp";
             }
             

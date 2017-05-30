@@ -28,65 +28,65 @@
                     <p>infos personnelles</p>
                     <label for="genre">Genre</label>
                     <input type="radio" name="genre" value="Mr">Mr</input>
-                    <input type="radio" name="genre" value="Mme">Mme</input><span class="lblInfos">${genre}</span>
+                    <input type="radio" name="genre" value="Mme">Mme</input><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['genre']}" /></span>
                 </div>
                 <div class="membreInfos">
-                    <label for="nom">Nom </label><input type="text" name="nom"/><span class="lblInfos">${nom}</span>
+                    <label for="nom">Nom </label><input type="text" name="nom" value="<c:out value="${param.nom}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['nom']}" /></span>
                 </div>
                         
                 <div class="membreInfos">
-                    <label for="prenom">Prenom</label><input type="text" name="prenom" /><span class="lblInfos">${prenom}</span>
+                    <label for="prenom">Prenom</label><input type="text" name="prenom" value="<c:out value="${param.prenom}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['prenom']}" /></span>
                 </div>
                       <!--  
                 <div class="membreInfos">
-                    <label for="dateNaissance">Date de Naissance</label><input type="date" name="dateNaissance" /><span class="lblInfos">${dateNaissance}</span>
+                    <label for="dateNaissance">Date de Naissance</label><input type="date" name="dateNaissance" /><span class="lblErreur"></span>
                 </div>
                       -->
                 <div class="membreInfos">
-                    <label for="email">Email</label><input type="email" name="email" /><span class="lblInfos">${email}</span>
+                    <label for="email">Email</label><input type="email" name="email" value="<c:out value="${param.email}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['email']}" /></span>
                 </div>
                         
                 <div class="membreInfos">
-                    <label for="password">Mot de passe</label><input type="text" name="password" /><span class="lblInfos">${password}</span>
+                    <label for="password">Mot de passe</label><input type="text" name="password" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['password']}" /></span>
                 </div>
                 
                  <div class="membreInfos">
-                    <label for="confirmPassword">Confirmation Mot de passe</label><input type="text" name="ConfirmPassword" /><span class="lblInfos">${confirmPassword}</span>
+                    <label for="confirmPassword">Confirmation Mot de passe</label><input type="text" name="ConfirmPassword" /><span class="lblErreur"></span>
                 </div>
                         
                 <div class="membreInfos">
-                    <label for="telF">Telephone fixe</label><input type="text" name="telF" /><span class="lblInfos">${telF}</span>
+                    <label for="telF">Telephone fixe</label><input type="text" name="telF" value="<c:out value="${param.telF}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['telF']}" /></span>
                 </div>
                         
                 <div class="membreInfos">
-                    <label for="telM">Telephone mobile</label><input type="text" name="telM" /><span class="lblInfos">${telM}</span>
+                    <label for="telM">Telephone mobile</label><input type="text" name="telM" value="<c:out value="${param.telM}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['telM']}" /></span>
                 </div>   
                 
-                <div class="membreInfos">
+                <div class="membreAdresse">
                    
-                    <label for="numVoie">Numero voie</label><input type="text" name="numVoie" /><span class="lblInfos">${numVoie}</span>
+                    <label for="numVoie">Numero voie</label><input type="text" name="numVoie" value="<c:out value="${param.numVoie}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['numVoie']}" /></span>
                 </div>
                     
-                <div class="membreInfos">
-                    <label for="nomVoie">Nom voie</label><input type="text" name="nomVoie" /><span class="lblInfos">${nomVoie}</span>
+                <div class="membreAdresse">
+                    <label for="nomVoie">Nom voie</label><input type="text" name="nomVoie" value="<c:out value="${param.nomVoie}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['nomVoie']}" /></span>
                 </div>
                     
-                <div class="membreInfos">
-                    <label for="nomVoieSuite">Nom voie suite</label><input type="text" name="nomVoieSuite" /><span class="lblInfos">${nomVoieSuite}</span>
+                <div class="membreAdresse">
+                    <label for="nomVoieSuite">Nom voie suite</label><input type="text" name="nomVoieSuite" value="<c:out value="${param.nomVoieSuite}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['nomVoieSuite']}" /></span>
                 </div>    
                     
-                <div class="membreInfos">
-                    <label for="codePostal">Code postal</label><input type="text" name="codePostal" /><span class="lblInfos">${codePostal}</span>
+                <div class="membreAdresse">
+                    <label for="codePostal">Code postal</label><input type="text" name="codePostal" value="<c:out value="${param.codePostal}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['codePostal']}" /></span>
                 </div>    
                     
-                <div class="membreInfos">
-                    <label for="ville">Ville</label><input type="text" name="ville" /><span class="lblInfos">${ville}</span>
+                <div class="membreAdresse">
+                    <label for="ville">Ville</label><input type="text" name="ville" value="<c:out value="${param.ville}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['ville']}" /></span>
                 </div>    
                     
-                <div class="membreInfos">
-                    <label for="pays">Pays</label><input type="text" name="pays" /><span class="lblInfos">${pays}</span>
+                <div class="membreAdresse">
+                    <label for="pays">Pays</label><input type="text" name="pays" value="<c:out value="${param.pays}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['pays']}" /></span>
                 </div>
-                <div id="submitInscription">
+                <div class="membreAdresse">
                     <input type="submit" name="submit" value="Enregister"/>
                 </div>
             </form>
@@ -102,6 +102,6 @@
     </section>
                         
     <footer>
-        <p>Avec LibElec, trouvez votre oeuvre préférée</p>
+        <p>Avec LibElec, trouvez votre oeuvre préfèrée</p>
     </footer>
 </html>

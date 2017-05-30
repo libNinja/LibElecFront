@@ -21,12 +21,18 @@
         <div class="container" >
         <h1>Bienvenue ${client.cliNom}</h1>
         
-        <div id="historiqueCommandes">
-            <p>Commande en cours</p>
-            <p>Historique des achats</p>
-            <p>Informations Personnelles</p>
+        <div id="commandeEnCours">
+            <c:url var="commandeEnCours" value="FrontControleur?section=commandeEnCours" /><a href="${commandeEnCours}">Commande en cours</a>
         </div>
+        
+        <div id="historiqueAchats">
+            <c:url var="historiqueDesAchats" value="FrontControleur?section=historiqueDesAchats" /><a href="${historiqueDesAchats}">Historique des achats</a>
         </div>
+        
+        <div id="informationsPersonnelles">
+            <c:url var="informationsPersonnelles" value="FrontControleur?section=informationsPersonnelles" /><a href="${informationsPersonnelles}">Informations personnelles</a>
+        </div>
+        
         
     </body>
     <section id="boxes">
