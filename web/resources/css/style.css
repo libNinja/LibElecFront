@@ -89,6 +89,13 @@ header a:hover{
     font-weight:bold;
 }
 
+/*infosPersonnelles*/
+.infosClient {
+    margin-left: 150px;
+    
+}
+
+
 /* pageConnexion */
 
 
@@ -129,6 +136,23 @@ fieldset
     
 }
 
+#secMembreInfos {
+  width: 400px;
+    height: 500px;
+    margin: 50px;
+    float: left;
+   
+    
+}
+
+#secMembreAdresse {
+   
+    height: 500px;
+    margin: 30px;
+    margin-left: 80px;
+    margin-top: 150px;
+}
+
 .membreInfos label{
     
     display: block;
@@ -138,9 +162,9 @@ fieldset
     
 }
 
-.membreInfos input[type="text"], [type="email"], [type="date"] {
+.membreInfos input[type="text"], [type="email"] {
     width: 150px;
-    margin-bottom: 20px;
+    margin: 10px;
     vertical-align: top;
     
 }
@@ -152,10 +176,8 @@ fieldset
     align-content: center;
 }
 
-.membreAdresse {
-    float: right;
-    
-}
+
+
 
 .membreAdresse label{
     
@@ -165,14 +187,20 @@ fieldset
     
 }
 
-.membreAdresse input[type="text"]{
+.membreAdresse input[type="text"] {
     width: 150px;
     margin-bottom: 20px;
     vertical-align: top;
     
 }
 
-
+.membreAdresse input[type="submit"] {
+    width: 150px;
+    margin-top: 50px;
+    margin-left: 100px;
+    vertical-align: top;
+    
+}
 
 #nonInscrit {
     color: BLUE;

@@ -12,6 +12,7 @@ public class GestionClient {
     public ClientDAO clientDao;
     public AdresseDAO adresseDao;
     public Client client;
+    public Client nouveauMembre;
     public Adresse adresse;
     
     
@@ -38,7 +39,7 @@ public class GestionClient {
     
     public Client creerNouveauMembre(HashMap<String, String> infosNouveauMembre) {
         HashMap<String, String> infos = infosNouveauMembre;
-        Client nouveauMembre = new Client();
+        nouveauMembre = new Client();
         LocalDate toDay = LocalDate.now();
         
         switch (infos.get("genre")) {
@@ -91,6 +92,16 @@ public class GestionClient {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    public Client getNouveauMembre() {
+        return nouveauMembre;
+    }
+
+    public void setNouveauMembre(Client nouveauMembre) {
+        this.nouveauMembre = nouveauMembre;
+    }
+    
+    
     
     public Adresse getAdresse() {
         return adresse;

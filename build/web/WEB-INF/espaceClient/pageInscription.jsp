@@ -24,7 +24,8 @@
                 
                 <fieldset id="fieldset">
                     <legend>Nouveau Membre</legend>
-                <div class="membreInfos">
+               <section id="secMembreInfos">
+                    <div class="membreInfos">
                     <p>infos personnelles</p>
                     <label for="genre">Genre</label>
                     <input type="radio" name="genre" value="Mr">Mr</input>
@@ -61,7 +62,9 @@
                 <div class="membreInfos">
                     <label for="telM">Telephone mobile</label><input type="text" name="telM" value="<c:out value="${param.telM}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['telM']}" /></span>
                 </div>   
+               </section>
                 
+                <section id="secMembreAdresse">
                 <div class="membreAdresse">
                    
                     <label for="numVoie">Numero voie</label><input type="text" name="numVoie" value="<c:out value="${param.numVoie}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['numVoie']}" /></span>
@@ -89,6 +92,8 @@
                 <div class="membreAdresse">
                     <input type="submit" name="submit" value="Enregister"/>
                 </div>
+                </section>
+                
             </form>
         </fieldset>
     </body>

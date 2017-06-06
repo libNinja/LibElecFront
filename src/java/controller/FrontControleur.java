@@ -22,6 +22,7 @@ import java.util.HashMap;
 import accessDB.ClientDAO;
 import beans.Adresse;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpSession;
 import model.*;
 
 //TODO il faut activer la session des la rentree du mot de passe
@@ -51,6 +52,8 @@ public class FrontControleur extends HttpServlet {
         
         String chaineInscriptionInvalide ="Un ou plusieurs champs invalides Veuillez completer les champs manquants";
         
+        HttpSession session = null;
+        
         boolean nouveauComplet;
         boolean log = false;
         
@@ -67,6 +70,7 @@ public class FrontControleur extends HttpServlet {
         
         if("espacePersonnel".equalsIgnoreCase(section)) {
             if(log) {
+                session = request.getSession();
                 page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
             }
             else {
@@ -88,9 +92,17 @@ public class FrontControleur extends HttpServlet {
                     }
                     else {
                         if(verificateurSaisie.checkMdp(request.getParameter("password"))) {
-                            System.out.println("true");
-                            request.setAttribute("client", verificateurSaisie.getClient());
-                            page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
+                           
+                            try {
+                                gestionClient = new GestionClient(verificateurSaisie.getClient());
+                                
+                                session = request.getSession();
+                                session.setAttribute("client", gestionClient.getClient());
+                                page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
+                            }catch(NamingException ex) {
+                                System.err.println("naming exception: gestionClient / " + ex.getMessage());
+                            }
+                            
                         }
                         else {
                             request.setAttribute("identifiantInconnu", identifiantInconnu);
@@ -193,6 +205,8 @@ public class FrontControleur extends HttpServlet {
             
             
             if(nouveauComplet) {
+                session = request.getSession();
+                session.setAttribute("client", gestionClient.getNouveauMembre());
                 page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
             }
             else {
@@ -201,6 +215,11 @@ public class FrontControleur extends HttpServlet {
                 page = "/WEB-INF/espaceClient/pageInscription.jsp";
             }
             
+        }
+        
+        if("informationsPersonnelles".equalsIgnoreCase(section)) {
+           
+            page = "/WEB-INF/espaceClient/informationsPersonnelles.jsp";
         }
         
         
