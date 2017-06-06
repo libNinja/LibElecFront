@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.Client;
-import modelTablesDB.ClientDAO;
+import model.ClientDAO;
 /**
  *
  * @author cdi213
