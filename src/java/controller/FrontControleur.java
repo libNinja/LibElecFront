@@ -13,14 +13,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD:src/java/controller/FrontController.java
 import beans.Client;
 import model.ClientDAO;
+=======
+
+>>>>>>> 79d2e82ad8e6db51015292f7ea3c1ad51e7f887a:src/java/controller/FrontControleur.java
 /**
  *
  * @author cdi213
  */
+<<<<<<< HEAD:src/java/controller/FrontController.java
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
+=======
+@WebServlet(name = "FrontControleur", urlPatterns = {"/FrontControleur"})
+public class FrontControleur extends HttpServlet {
+>>>>>>> 79d2e82ad8e6db51015292f7ea3c1ad51e7f887a:src/java/controller/FrontControleur.java
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,6 +51,7 @@ public class FrontController extends HttpServlet {
         String title = "";
         request.setAttribute("title", title);
         
+<<<<<<< HEAD:src/java/controller/FrontController.java
         
         Client client = new Client();
         client.setCliId(1);
@@ -49,6 +59,9 @@ public class FrontController extends HttpServlet {
         request.setAttribute("client", c);
         boolean log = false;
         
+=======
+    
+>>>>>>> 79d2e82ad8e6db51015292f7ea3c1ad51e7f887a:src/java/controller/FrontControleur.java
         
         
         if("home".equalsIgnoreCase(section)) {
@@ -60,6 +73,7 @@ public class FrontController extends HttpServlet {
             page = "/WEB-INF/includes/headerCommun.jsp";
         }
         
+<<<<<<< HEAD:src/java/controller/FrontController.java
         if("espacePersonnel".equalsIgnoreCase(section)) {
             if(log) {
                 page = "/WEB-INF/espaceClient/espacePersonnel.jsp";
@@ -69,6 +83,9 @@ public class FrontController extends HttpServlet {
                
             }
         }
+=======
+        
+>>>>>>> 79d2e82ad8e6db51015292f7ea3c1ad51e7f887a:src/java/controller/FrontControleur.java
 //            response.sendRedirect(page);
         //return ;
             
