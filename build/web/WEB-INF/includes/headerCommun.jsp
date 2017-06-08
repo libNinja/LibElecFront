@@ -9,9 +9,10 @@
                     
         <nav>
             <ul>
-                <li class="current"><c:url var="acceuil" value="FrontControleur?section=home" /><a href="${acceuil}">Acceuil</a></li>
-                <li><c:url var="catalogue" value="FrontControleur?section=catalogue" /><a href="${catalogue}">Catalogue</a></li>
-                <li><c:url var="espacePersonnel" value="FrontControleur?section=espacePersonnel" /><a href="${espacePersonnel}">Espace Personnel</a></li>
+                <li class="current"><c:url var="acceuil" value="FrontController?section=home" /><a href="${acceuil}">Accueil</a></li>
+                <li><c:url var="catalogue" value="FrontControleur?section=themes" /><a href="${catalogue}">Catalogue</a></li>
+                <li><c:url var="espacePersonnel" value="FrontController?section=espacePersonnel" /><a href="${espacePersonnel}">Espace Personnel</a></li>
+                <li><c:url var="url03" value="FrontControlleur?section=affichage-panier" /><a href="${url03}">Panier (${infoPanier}) </a></li>
             </ul>
         </nav>
     </div>

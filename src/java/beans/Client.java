@@ -1,12 +1,9 @@
+
 package beans;
 
-import java.io.Serializable;
-
-
-
-
-public class Client implements Serializable {
-    private long cliId;
+public class Client {
+    
+    private  long cliId;
     private int cliGenre;
     private String cliPrenom;
     private String cliNom;
@@ -17,13 +14,25 @@ public class Client implements Serializable {
     private String cliTelM;
     private int cliStatut;
     private String cliChampLibre;
-    
+
     public Client() {
-        
     }
 
     public Client(long cliId, int cliGenre, String cliPrenom, String cliNom, String cliEmail, String cliMdp, String cliDateAdhesion, String cliTelF, String cliTelM, int cliStatut, String cliChampLibre) {
         this.cliId = cliId;
+        this.cliGenre = cliGenre;
+        this.cliPrenom = cliPrenom;
+        this.cliNom = cliNom;
+        this.cliEmail = cliEmail;
+        this.cliMdp = cliMdp;
+        this.cliDateAdhesion = cliDateAdhesion;
+        this.cliTelF = cliTelF;
+        this.cliTelM = cliTelM;
+        this.cliStatut = cliStatut;
+        this.cliChampLibre = cliChampLibre;
+    }
+
+    public Client(int cliGenre, String cliPrenom, String cliNom, String cliEmail, String cliMdp, String cliDateAdhesion, String cliTelF, String cliTelM, int cliStatut, String cliChampLibre) {
         this.cliGenre = cliGenre;
         this.cliPrenom = cliPrenom;
         this.cliNom = cliNom;
@@ -124,15 +133,11 @@ public class Client implements Serializable {
         this.cliChampLibre = cliChampLibre;
     }
 
-    
     @Override
     public String toString() {
-        String infos = "client "
-                + cliId + "\n"
-        + cliNom + " ";
-        
-        return infos;
+        return "Client{" + "cliId=" + cliId + ", cliGenre=" + cliGenre + ", cliPrenom=" + cliPrenom + ", cliNom=" + cliNom + ", cliEmail=" + cliEmail + ", cliMdp=" + cliMdp + ", cliDateAdhesion=" + cliDateAdhesion + ", cliTelF=" + cliTelF + ", cliTelM=" + cliTelM + ", cliStatut=" + cliStatut + ", cliChampLibre=" + cliChampLibre + '}';
     }
-        
+    
+     
+    
 }
-

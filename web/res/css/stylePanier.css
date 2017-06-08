@@ -1,0 +1,35 @@
+/*Boutons dans detail-panier*/
+
+.container
+table {
+    border-collapse: collapse;
+    width: 90%;
+ }
+ th, td{
+     border: 1px solid black;
+     text-align: center;
+     width: 15%;
+ }
+ caption{
+     font-weight: bold;
+ }
+ 
+#Catalogue
+{
+    color:black;
+    border-style:hidden;
+    border-width:2px;
+    border-color:blue;
+    margin-top: 50px;
+    margin-left: 200px;
+}
+
+#Valider_Commande
+{
+    color:black;
+    border-style:hidden;
+    border-width:2px;
+    border-color:blue;
+    margin-top:50px;
+    margin-left: 100px;
+}

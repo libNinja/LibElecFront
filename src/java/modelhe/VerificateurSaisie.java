@@ -1,9 +1,9 @@
-package model;
+package modelhe;
 
 import beans.Client;
 import java.util.ArrayList;
 import java.util.HashMap;
-import accessDB.ClientDAO;
+import accessDBhe.ClientDAO;
 import javax.naming.NamingException;
 
 public class VerificateurSaisie {

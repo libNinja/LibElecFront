@@ -1,11 +1,8 @@
+
 package beans;
 
-import java.io.Serializable;
-
-
-
-
-public class Adresse implements Serializable {
+public class Adresse {
+    
     private long adrId;
     private long desId;
     private long cliId;
@@ -17,13 +14,8 @@ public class Adresse implements Serializable {
     private String adrVille;
     private String adrPays;
     private int adrStatut;
-    
+
     public Adresse() {
-        
-    }
-    
-    public Adresse(long cliId) {
-        this.cliId = cliId;
     }
 
     public Adresse(long adrId, long desId, long cliId, long cli_cliId, int adrNumVoie, String adrNomVoie, String adrNomVoieSuite, String adrCp, String adrVille, String adrPays, int adrStatut) {
@@ -127,6 +119,12 @@ public class Adresse implements Serializable {
     public void setAdrStatut(int adrStatut) {
         this.adrStatut = adrStatut;
     }
+
+    @Override
+    public String toString() {
+        return "Adresse{" + "adrId=" + adrId + ", desId=" + desId + ", cliId=" + cliId + ", cli_cliId=" + cli_cliId + ", adrNumVoie=" + adrNumVoie + ", adrNomVoie=" + adrNomVoie + ", adrNomVoieSuite=" + adrNomVoieSuite + ", adrCp=" + adrCp + ", adrVille=" + adrVille + ", adrPays=" + adrPays + ", adrStatut=" + adrStatut + '}';
+    }
+    
     
     
 }

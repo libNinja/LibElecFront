@@ -10,13 +10,13 @@
     </head>
     
     <body>
-        <c:url var="headerCommun" value="FrontControleur?section=menu-main" />
+        <c:url var="headerCommun" value="FrontControleurEspaceClient?section=menu-main" />
         <c:import url="${headerCommun}" />
         
         
-        <div id="loger">
+        <section id="panLogger">
             <h1>Connexion</h1>
-            <section id="panLogger">
+            
                 <div id="clientInconnu">
                     <p>${identifiantInconnu}</p>
                     <p>${emailVide}</p>
@@ -24,22 +24,33 @@
                    </div>
                     
                     
-                    <form action="FrontControleur?section=verifierClient" method="POST">
-                        <input type="email" name="email" placeHolder="Entrez votre Email..." />
+                    <form action="FrontControleurEspaceClient?section=verifierClient" method="POST">
+                        <div class="infosConnection">
+                            <input type="email" name="email" placeHolder="Entrez votre Email..." />
+                        </div>
+                        
+                        <div class="infosConnection">
                         <input type="password" name="password" placeHolder="Mot de passe"/>
-                        <input type="checkbox" name="checkbox" value="Mémoriser mes identifiants" />
+                        </div>
+                        
+                        <div class="infosConnection">
+                            <input type="checkbox" name="checkbox"><label> Mémoriser mes identifiants</label></input>
+                        </div>
+                        
+                        <div class="infosConnection">
                         <input type="submit" name="submit" value="se Connecter"/>
+                        </div>
                     </form>
                 
                 
               
                     <p>Pas encore inscrit ? </p>
                     <p>
-                        <c:url var="pageInscription" value="FrontControleur?section=pageInscription" />
+                        <c:url var="pageInscription" value="FrontControleurEspaceClient?section=pageInscription" />
                         <a href="${pageInscription}">Inscrivez-vous ici !</a></p>
                 
             </section>
-        </div>
+        
     
 </body>
 </html>

@@ -10,7 +10,7 @@
         <title>LibElec | Informations Personnelles</title>
     </head>
     <body>
-        <c:url var="headerCommun" value="FrontControleur?section=menu-main" />
+        <c:url var="headerCommun" value="FrontControleurEspaceClient?section=menu-main" />
         <c:import url="${ headerCommun }" />
         
         <div class="infosClient">

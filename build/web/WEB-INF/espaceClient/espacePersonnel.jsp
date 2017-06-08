@@ -16,22 +16,22 @@
         <title>LibElec | Espace Personnel</title>
     </head>
     <body>
-        <c:url var="headerCommun" value="FrontControleur?section=menu-main" />
+        <c:url var="headerCommun" value="FrontControleurEspaceClient?section=menu-main" />
         <c:import url="${headerCommun}" />
         <div class="container" >
         <h1>Bienvenue ${client.cliNom}</h1>
         
         
         <div id="commandeEnCours">
-            <c:url var="commandeEnCours" value="FrontControleur?section=commandeEnCours" /><a href="${ commandeEnCours }">Commande en cours</a>
+            <c:url var="commandeEnCours" value="FrontControleurEspaceClient?section=commandeEnCours" /><a href="${ commandeEnCours }">Commande en cours</a>
         </div>
         
         <div id="historiqueAchats">
-            <c:url var="historiqueDesAchats" value="FrontControleur?section=historiqueDesAchats" /><a href="${ historiqueDesAchats }">Historique des achats</a>
+            <c:url var="historiqueDesAchats" value="FrontControleurEspaceClient?section=historiqueDesAchats" /><a href="${ historiqueDesAchats }">Historique des achats</a>
         </div>
         
         <div id="informationsPersonnelles">
-            <c:url var="informationsPersonnelles" value="FrontControleur?section=informationsPersonnelles" /><a href="${ informationsPersonnelles }">Informations personnelles</a>
+            <c:url var="informationsPersonnelles" value="FrontControleurEspaceClient?section=informationsPersonnelles" /><a href="${ informationsPersonnelles }">Informations personnelles</a>
         </div>
         
         

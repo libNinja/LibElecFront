@@ -10,13 +10,13 @@
     </head>
     
     <body id="arriere">
-        <c:url var="headerCommun" value="FrontControleur?section=menu-main" />
+        <c:url var="headerCommun" value="FrontControleurEspaceClient?section=menu-main" />
         <c:import url="${headerCommun}" />
         
         <div id="membre" >
             <p>Veuillez renseigner les informations</p>
             
-            <form action="FrontControleur?section=enregisterNouveauMembre" method="POST">
+            <form action="FrontControleurEspaceClient?section=enregisterNouveauMembre" method="POST">
                 <div id="chaineInscriptionVide">
                     <p>${chaineInscriptionInvalide}</p>
                     
@@ -24,7 +24,7 @@
                 
                 <fieldset id="fieldset">
                     <legend>Nouveau Membre</legend>
-               <section id="secMembreInfos">
+               
                     <div class="membreInfos">
                     <p>infos personnelles</p>
                     <label for="genre">Genre</label>
@@ -62,9 +62,7 @@
                 <div class="membreInfos">
                     <label for="telM">Telephone mobile</label><input type="text" name="telM" value="<c:out value="${param.telM}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['telM']}" /></span>
                 </div>   
-               </section>
-                
-                <section id="secMembreAdresse">
+               
                 <div class="membreAdresse">
                    
                     <label for="numVoie">Numero voie</label><input type="text" name="numVoie" value="<c:out value="${param.numVoie}" />" /><span class="lblErreur"><c:out value="${verificateurSaisie.listeErreurs['numVoie']}" /></span>
@@ -92,7 +90,7 @@
                 <div class="membreAdresse">
                     <input type="submit" name="submit" value="Enregister"/>
                 </div>
-                </section>
+               
                 
             </form>
         </fieldset>

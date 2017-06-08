@@ -97,8 +97,46 @@ header a:hover{
 
 
 /* pageConnexion */
+#panLogger{
+    display: block;
+    margin-top: 50px;
+    margin-left: 120px;
+}
 
+.infosConnection input[type="email"], input[type="password"] {
+    width: 200px;
+     margin-left: 10px;
+     margin-bottom: 10px;
+    vertical-align: top;
+    
+}
 
+.infosConnection input[type="checkbox"] label{
+   margin-top: 20px;
+    margin-left: 20px;
+    vertical-align: top;
+    margin-bottom: 20px;
+    
+}
+
+.infosConnection input[type="checkbox"] label{
+   
+    margin-left: 25px;
+    
+    
+}
+
+.infosConnection input[type="submit"] {
+    width: 150px;
+    margin-top: 30px;
+    margin-left: 150px;
+    vertical-align: top;
+    
+}
+    
+#clientInconnu {
+    color: RED;
+}
 
 #arriere {
     background-color:  /*bleu blanc cassé*/#CCC;
@@ -136,22 +174,6 @@ fieldset
     
 }
 
-#secMembreInfos {
-  width: 400px;
-    height: 500px;
-    margin: 50px;
-    float: left;
-   
-    
-}
-
-#secMembreAdresse {
-   
-    height: 500px;
-    margin: 30px;
-    margin-left: 80px;
-    margin-top: 150px;
-}
 
 .membreInfos label{
     
@@ -182,14 +204,14 @@ fieldset
 .membreAdresse label{
     
     display: block;
-    width: 150px;
+    width: 200px;
     float: left;
     
 }
 
 .membreAdresse input[type="text"] {
     width: 150px;
-    margin-bottom: 20px;
+    margin: 10px;
     vertical-align: top;
     
 }
